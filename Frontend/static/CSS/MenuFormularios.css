@@ -1,4 +1,18 @@
-#tabla_menu_opciones {
+#container{
+    align-items: center;
+}
+
+#tablemenu-options {
     height: auto;
     width: auto;
+    border: 0;
+    margin: auto;
+}
+
+#bf1, #bf2, #bf3, #bf4 {
+    height: auto;
+    width: auto;
+    margin: auto;
+    align-items: center;
+    align-self: center;
 }
