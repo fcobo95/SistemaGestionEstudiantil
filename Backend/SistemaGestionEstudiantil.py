@@ -8,9 +8,9 @@ TNS = cx_Oracle.makedsn('localhost', 1521, 'XE')
 laBaseDeDatos = cx_Oracle.connect('TCU', 'oracle', TNS)  # usuario/contraseña
 elCursor = laBaseDeDatos.cursor()
 
-elCursor.execute('SELECT * FROM ESTUDIANTE')
-for registro in elCursor:
-    print(registro)
+#elCursor.execute('SELECT * FROM ESTUDIANTE')
+#for registro in elCursor:
+#    print(registro)
 
 
 @app.route('/')
@@ -21,6 +21,7 @@ def hello_world():
 @app.route('/nuevoRegistro', methods=['POST'])
 def agregueRegistro():
     # Se reciben datos del estudiante y del encargado. Se ingresan a la BD primero los del encargado
+    #TODO: OPCIÓN PARA SELECCIONAR ENCARGADO EXISTENTE A UN NUEVO ALUMNO (CREAR NUEVO ENCARGADO O SELECCIONAR)
 
     # Datos estudiante
     laIdentificacion = request.json['identificacion']
@@ -57,20 +58,47 @@ def agregueRegistro():
                           laFechaNacimiento, elCiclo, elNivelComoNumero, laSeccion, laIdentificacionEncargado))
         laBaseDeDatos.commit()
 
-        print(laIdentificacionEncargado, elNombreEncargado, elTelefono, elParentesco, laDireccion)
-        print(laIdentificacion, elNombre, elPrimerApellido, elSegundoApellido, elSexo,
-                          laFechaNacimiento, elCiclo, elNivel, laSeccion, laIdentificacionEncargado)
-
         elTexto = "Los datos se han ingresado con éxito"
         laRespuesta = json.dumps(elTexto)  # convertir respuesta a json
         return Response(laRespuesta, 200, mimetype="application/json")
 
     except Exception as e:
-        print(e)
         elTexto = "Error: Imposible almacenar los datos"
         laRespuesta = json.dumps(elTexto)
         return Response(laRespuesta, 200, mimetype="application/json")
 
+@app.route('/nuevoProfesor', methods=['POST'])
+def nuevoProfesor():
+
+    laIdentificacion = request.json['identificacion']
+    elNombre = request.json['nombre']
+    elPrimerApellido = request.json['primerApellido']
+    elSegundoApellido = request.json['segundoApellido']
+    elTelefono = request.json['telefono']
+    elTelefonoComoNumero = int(elTelefono)
+
+    try:
+
+        laConsulta = 'INSERT INTO PROFESOR(IDENTIFICACION, NOMBRE, APELLIDO1, APELLIDO2,TELEFONO) ' \
+                     'VALUES (:1, :2, :3, :4, :5)'
+        elCursor.execute(laConsulta,
+                         (laIdentificacion, elNombre, elPrimerApellido, elSegundoApellido, elTelefonoComoNumero))
+        laBaseDeDatos.commit()
+
+        elTexto = "Los datos se han ingresado con éxito"
+        laRespuesta = json.dumps(elTexto)
+        return Response(laRespuesta, 200, mimetype="application/json")
+
+    except Exception as e:
+        elTexto = "Error: Imposible almacenar los datos"
+        laRespuesta = json.dumps(elTexto)
+        return Response(laRespuesta, 200, mimetype="application/json")
+
+
+
+@app.route('/actualizarRegistro', methods=['POST'])
+def actualiceRegistro():
+    return ''
 
 if __name__ == '__main__':
     app.run(debug=True,port=5000,host='0.0.0.0')
