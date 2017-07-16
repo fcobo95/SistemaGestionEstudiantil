@@ -18,7 +18,7 @@ elCursor = laBaseDeDatos.cursor()
 def hello_world():
     return 'Hola Mundo'
 
-
+#TODO: MÉTODO PARA ERRORES
 @app.route('/nuevoRegistro', methods=['POST'])
 def agregueRegistro():
     # Se reciben datos del estudiante y del encargado. Se ingresan a la BD primero los del encargado
