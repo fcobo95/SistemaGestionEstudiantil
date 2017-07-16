@@ -94,6 +94,31 @@ def nuevoProfesor():
         laRespuesta = json.dumps(elTexto)
         return Response(laRespuesta, 200, mimetype="application/json")
 
+@app.route('/profesorMateria', methods=['POST'])
+def asigneMateriaProfesor():
+
+#TODO: SOLUCIONAR PROBLEMA EN EL EXECUTE
+
+    elProfesor  = request.json['profesor']
+    lasMaterias = request.json['materia'] # "materia" : "materia1, materia2..."
+
+    lasMateriasComoLista = lasMaterias.split(',')
+
+    try:
+         for cadaMateria in lasMateriasComoLista:
+             laConsulta = 'INSERT INTO PROFESOR_MATERIA(PROFESOR, MATERIA) VALUES (:1, :2)'
+             #elCursor.execute(laConsulta, (elProfesor, cadaMateria))
+             #laBaseDeDatos.commit()
+
+         elTexto = "Los datos se han ingresado con éxito"
+         laRespuesta = json.dumps(elTexto)
+         return Response(laRespuesta, 200, mimetype="application/json")
+
+    except Exception as e:
+         print(e)
+         elTexto = "Error: Imposible almacenar los datos"
+         laRespuesta = json.dumps(elTexto)
+         return Response(laRespuesta, 200, mimetype="application/json")
 
 
 @app.route('/actualizarRegistro', methods=['POST'])
