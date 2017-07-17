@@ -1,4 +1,4 @@
-from flask import Flask, request, json, Response
+from flask import Flask, request, json, Response, redirect, render_template
 import cx_Oracle
 
 app = Flask(__name__)
@@ -15,8 +15,12 @@ elCursor = laBaseDeDatos.cursor()
 
 
 @app.route('/')
-def hello_world():
-    return 'Hola Mundo'
+def redirecciona():
+    return redirect('/Login',302)
+
+@app.route('/formularioIngreso')
+def muestreFormulario():
+    return render_template('NuevoIngreso.html')
 
 #TODO: MÉTODO PARA ERRORES
 @app.route('/nuevoRegistro', methods=['POST'])
@@ -44,6 +48,9 @@ def agregueRegistro():
     laDireccion = request.json['direccion']
     elTelefonoComoNumero = int(elTelefono)
 
+    print(laIdentificacion, elNombre, elPrimerApellido, elSegundoApellido, elSexo, laFechaNacimiento, elCiclo, elNivel,
+          laSeccion, elNivelComoNumero)
+    print(laIdentificacion, elNombreEncargado, elTelefono, laDireccion, elTelefonoComoNumero)
     try:
 
         laConsulta = 'INSERT INTO ENCARGADO(IDENTIFICACION, NOMBRE_COMPLETO, TELEFONO, PARENTESCO, DIRECCION) ' \
