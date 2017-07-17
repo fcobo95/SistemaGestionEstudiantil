@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='NuevoIngreso.js') }}"></script>
 </head>
 <body>
 <div class="text-center">
@@ -16,27 +17,27 @@
     <h3>Datos del estudiante</h3>
     <form class="form-horizontal">
         <div class="form-group">
-            <label class="control-label col-sm-4" for="identificacion">Identificación:</label>
+            <label class="control-label col-sm-4" for="idEstudiante">Identificación:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="identificacion">
+                <input type="text" class="form-control" id="idEstudiante" required>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-4" for="nombre">Nombre:</label>
+            <label class="control-label col-sm-4" for="nombreEstudiante">Nombre:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="nombre">
+                <input type="text" class="form-control" id="nombreEstudiante" required>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-4" for="apellido1">Primer apellido:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="primerapellido">
+                <input type="text" class="form-control" id="apellido1" required>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-4" for="apellido2">Segundo apellido:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="segundoapellido">
+                <input type="text" class="form-control" id="apellido2">
             </div>
         </div>
         <div class="form-group">
@@ -51,7 +52,17 @@
         <div class="form-group">
             <label class="control-label col-sm-4" for="nacimiento">Fecha de nacimiento:</label>
             <div class="col-sm-4">
-                <input type="date" class="form-control" id="nacimiento">
+                <input type="date" class="form-control" id="nacimiento" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="ciclo">Ciclo:</label>
+            <div class="col-sm-4">
+                <select class="form-control" id="ciclo">
+                    <option>Primer</option>
+                    <option>Segundo</option>
+                    <option>N/A</option>
+                </select>
             </div>
         </div>
         <div class="form-group">
@@ -75,7 +86,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4" for="seccion">Sección:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="seccion">
+                <input type="text" class="form-control" id="seccion" required>
             </div>
         </div>
     </form>
@@ -84,38 +95,38 @@
     <h3>Datos del encargado</h3>
     <form class="form-horizontal" action="">
         <div class="form-group">
-            <label class="control-label col-sm-4" for="idencargado">Identificación:</label>
+            <label class="control-label col-sm-4" for="idEncargado">Identificación:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="idEncargado">
+                <input type="text" class="form-control" id="idEncargado" required>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-4" for="nombre">Nombre completo:</label>
+            <label class="control-label col-sm-4" for="nombreEncargado">Nombre completo:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="nombreEncargado">
+                <input type="text" class="form-control" id="nombreEncargado" required>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-4" for="telefono">Teléfono:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="telefono">
+                <input type="text" class="form-control" id="telefono" required>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-4" for="parentesco">Parentesco:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="parentesco">
+                <input type="text" class="form-control" id="parentesco" required>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-4" for="direccion">Dirección:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="direccion">
+                <input type="text" class="form-control" id="direccion" required>
             </div>
         </div>
         <div class="form-group">
             <div class="text-center">
-                <button type="submit" class="btn btn-default">Enviar</button>
+                <button type="button" class="btn btn-default" onclick="agregarNuevoIngreso()">Enviar</button>
             </div>
         </div>
     </form>
