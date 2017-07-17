@@ -48,10 +48,12 @@ th {
 	border-collapse: collapse;
 	text-align: center;
 	font-family: "Roboto", sans-serif;
-	font-size:85%;
+	font-size:80%;
+	padding: 0px;
 }
 
 td{
+	
 	border-collapse: collapse;
 	border: 1px solid #000;
 }
