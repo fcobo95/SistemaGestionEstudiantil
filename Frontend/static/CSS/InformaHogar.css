@@ -19,6 +19,19 @@ body {
 	margin: 1rem;
 	padding: 1rem;
 }
+
+img{
+	 margin: 10px 0px 0px 00px;
+	 float:left;
+	 width:60px;
+	 height:60px;
+}
+
+div{
+	margin: 0;
+	padding: 0;
+}
+
 table{
 	margin: 0 auto;
 	text-align: left;
@@ -31,14 +44,43 @@ th {
     white-space: nowrap;
 }
 
-img{
-	 margin: 10px 0px 0px 00px;
-	 float:left;
-	 width:50px;
-	 height:50px;
+.tablaPrincipal{
+	border-collapse: collapse;
+	text-align: center;
+	font-family: "Roboto", sans-serif;
+	font-size:85%;
 }
 
-div{
-	margin: 0;
-	padding: 0;
+td{
+	border-collapse: collapse;
+	border: 1px solid #000;
 }
+
+.tdInterno{
+	border-collapse: collapse;
+	text-align: center;
+	font-family: "Roboto", sans-serif;
+	width:60px;
+	border-bottom:0px;
+	border-left:0px;
+}
+
+.tdInternoB{
+	border-collapse: collapse;
+	text-align: center;
+	font-family: "Roboto", sans-serif;
+	width:60px;
+	border-bottom:0px;
+	border-left:0px;
+	border-right:0px;
+}
+
+.tdInternoC{
+	border-top:0px;
+	border-left:0px;
+	border-right:0px;
+}
+
+
+
+
