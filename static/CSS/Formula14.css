@@ -3,10 +3,31 @@
     text-align: center;
 }
 
-.campos-formula14 {
-    border-width: 1px;
+.blank {
+    border-width: 2px;
     border-style: solid;
     border-color: black;
+}
+
+#table-headers{
+    border-width: 3px;
+    border-style: solid;
+    border-color: black;
+}
+
+.campos-formula14-h {
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    text-align: center;
+}
+
+.letter{
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    text-align: center;
+    font-weight: 100;
 }
 
 img {
@@ -15,25 +36,3 @@ img {
     width: 60px;
     height: 60px;
 }
-
-table {
-    margin: 0 auto;
-    border-top: 3px;
-    border-bottom: 3px;
-    border-left: 3px;
-    border-right: 3px;
-}
-
-th {
-    border-top: 3px;
-    border-bottom: 3px;
-    border-left: 3px;
-    border-right: 3px;
-}
-
-.blank {
-    width: 90px;
-}
-
-
-
