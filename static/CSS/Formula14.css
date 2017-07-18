@@ -16,12 +16,25 @@
 }
 
 .campos-formula14-h {
+    font-weight: bolder;
+    width: 50px;
+    height: 60px;
+    column-width: 10px;
     -webkit-transform: rotate(-90deg);
     border-width: 2px;
     border-style: solid;
     border-color: black;
     text-align: center;
-    font-size: x-small;
+    font-size: xx-small;
+}
+
+.campos-formula14 {
+    font-weight: bold;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    text-align: center;
+    font-size: xx-small;
 }
 
 .letter {
