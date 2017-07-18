@@ -16,6 +16,7 @@
 }
 
 .campos-formula14-h {
+    -webkit-transform: rotate(-90deg);
     border-width: 2px;
     border-style: solid;
     border-color: black;
