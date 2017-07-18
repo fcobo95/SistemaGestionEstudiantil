@@ -1,15 +1,16 @@
-body {
-}
-
-.encabezado {
+.header-formula14 {
     font-weight: bold;
-    margin: 1rem;
-    padding: 1rem;
     text-align: center;
 }
 
+.campos-formula14 {
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+}
+
 img {
-    margin: 10px 0px 0px 00px;
+    margin: 10px 0 0 0;
     float: left;
     width: 60px;
     height: 60px;
@@ -28,6 +29,10 @@ th {
     border-bottom: 3px;
     border-left: 3px;
     border-right: 3px;
+}
+
+.blank {
+    width: 90px;
 }
 
 
