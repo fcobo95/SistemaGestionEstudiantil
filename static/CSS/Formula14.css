@@ -9,7 +9,7 @@
     border-color: black;
 }
 
-#table-headers{
+#table-headers {
     border-width: 3px;
     border-style: solid;
     border-color: black;
@@ -23,7 +23,7 @@
     text-align: center;
 }
 
-.letter{
+.letter {
     border-width: 2px;
     border-style: solid;
     border-color: black;
