@@ -11,20 +11,29 @@ body {
 .encabezado{
   margin: 1rem;
   padding: 1rem;
+  margin-bottom:0;
   text-align: center;
 }
 
-.datos{
+.cuerpo{
+    overflow:auto;
+}
+
+.datos1{
 	font-size:90%;
-	margin: 1rem;
-	padding: 1rem;
+	float:left;
+}
+
+.datos2{
+	font-size:90%;
+	float:right;
 }
 
 img{
 	 margin: 10px 0px 0px 00px;
 	 float:left;
-	 width:60px;
-	 height:60px;
+	 width:50px;
+	 height:50px;
 }
 
 div{
@@ -38,7 +47,6 @@ table{
 }
 
 th {
-    max-width: 290px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -83,6 +91,9 @@ td{
 	border-right:0px;
 }
 
+u{
+	text-align: center;
+}
 
 
 
