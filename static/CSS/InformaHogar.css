@@ -95,5 +95,9 @@ u{
 	text-align: center;
 }
 
+header, footer {
+display: none;
+}
+
 
 
