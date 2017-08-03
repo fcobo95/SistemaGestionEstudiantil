@@ -46,6 +46,7 @@ def agregueRegistro():
     elTelefono = request.json['telefono']
     elParentesco = request.json['parentesco']
     laDireccion = request.json['direccion']
+    elCorreo = request.json['correo']
     elTelefonoComoNumero = int(elTelefono)
 
     print(laIdentificacion, elNombre, elPrimerApellido, elSegundoApellido, elSexo, laFechaNacimiento, elCiclo, elNivel,
@@ -53,11 +54,11 @@ def agregueRegistro():
     print(laIdentificacion, elNombreEncargado, elTelefono, laDireccion, elTelefonoComoNumero)
     try:
 
-        laConsulta = 'INSERT INTO ENCARGADO(IDENTIFICACION, NOMBRE_COMPLETO, TELEFONO, PARENTESCO, DIRECCION) ' \
-                     'VALUES (:1,:2, :3, :4, :5)'
+        laConsulta = 'INSERT INTO ENCARGADO(IDENTIFICACION, NOMBRE_COMPLETO, TELEFONO, PARENTESCO, DIRECCION, CORREO) ' \
+                     'VALUES (:1,:2, :3, :4, :5, :6)'
         elCursor.execute(laConsulta,
                          (
-                         laIdentificacionEncargado, elNombreEncargado, elTelefonoComoNumero, elParentesco, laDireccion))
+                         laIdentificacionEncargado, elNombreEncargado, elTelefonoComoNumero, elParentesco, laDireccion, elCorreo))
         laBaseDeDatos.commit()
 
         laConsulta = 'INSERT INTO ESTUDIANTE (IDENTIFICACION, NOMBRE, APELLIDO1, APELLIDO2, SEXO, FECHA_NACIMIENTO, ' \
