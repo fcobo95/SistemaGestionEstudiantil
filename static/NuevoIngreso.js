@@ -15,6 +15,7 @@ function agregarNuevoIngreso() {
     var telefono = $("#telefono").val();
     var parentesco = $("#parentesco").val();
     var direccion = $("#direccion").val();
+    var correo = $("#correo").val();
 
     var losDatos = JSON.stringify({
         identificacion: idEstudiante,
@@ -30,7 +31,8 @@ function agregarNuevoIngreso() {
         nombreEncargado: nombreEncargado,
         telefono: telefono,
         parentesco: parentesco,
-        direccion: direccion});
+        direccion: direccion,
+        correo: correo});
 
     $.ajax({
         "async": true,
