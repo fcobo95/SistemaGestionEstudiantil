@@ -18,6 +18,10 @@ elCursor = laBaseDeDatos.cursor()
 def redirecciona():
     return redirect('/Login',302)
 
+@app.route('/Login')
+def login():
+    return render_template('Login.html')
+
 @app.route('/formularioIngreso')
 def muestreFormulario():
     return render_template('NuevoIngreso.html')
