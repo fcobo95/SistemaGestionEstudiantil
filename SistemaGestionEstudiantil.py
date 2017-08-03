@@ -22,6 +22,10 @@ def redirecciona():
 def muestreFormulario():
     return render_template('NuevoIngreso.html')
 
+@app.route('/formularioProfesor')
+def muestreFormularioProfesor():
+    return render_template('NuevoProfesor.html')
+
 #TODO: MÉTODO PARA ERRORES
 @app.route('/nuevoRegistro', methods=['POST'])
 def agregueRegistro():
@@ -80,11 +84,11 @@ def agregueRegistro():
 
 @app.route('/nuevoProfesor', methods=['POST'])
 def nuevoProfesor():
-    laIdentificacion = request.json['identificacion']
-    elNombre = request.json['nombre']
-    elPrimerApellido = request.json['primerApellido']
-    elSegundoApellido = request.json['segundoApellido']
-    elTelefono = request.json['telefono']
+    laIdentificacion = request.form['identificacion']
+    elNombre = request.form['nombre']
+    elPrimerApellido = request.form['primerApellido']
+    elSegundoApellido = request.form['segundoApellido']
+    elTelefono = request.form['telefono']
     elTelefonoComoNumero = int(elTelefono)
 
     try:
