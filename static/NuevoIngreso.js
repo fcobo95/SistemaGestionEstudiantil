@@ -43,11 +43,13 @@ function agregarNuevoIngreso() {
         "data": losDatos,
         success: function (response) {
             console.log(response);
-            alert(response)
+            $("#result").addClass("alert alert-success").text("Lo datos se han almacenado correctamente.");
+            $("#result").alert();
         },
         error: function (response) {
-            console.log(response);
-            alert(response)
+           console.log(response);
+            $("#result").addClass("alert alert-danger").text("No es posible guardar los datos.");
+            $("#result").alert();
         }
     });
 }

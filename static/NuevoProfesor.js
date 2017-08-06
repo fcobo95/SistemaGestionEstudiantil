@@ -5,6 +5,7 @@ function agregarNuevoProfesor() {
     var primerApellido = $("#primerApellido").val();
     var segundoApellido = $("#segundoApellido").val();
     var telefono = $("#telefono").val();
+    var correo = $("#correo").val();
 
     $.ajax({
         "async": true,
@@ -13,11 +14,13 @@ function agregarNuevoProfesor() {
         type: 'POST',
         success: function (response) {
             console.log(response);
-            alert('Los datos se han guardado correctamente')
+            $("#result").addClass("alert alert-success").text("Lo datos se han almacenado correctamente.");
+            $("#result").alert();
         },
         error: function (response) {
-             console.log(response);
-            alert('Ha ocurrido un error')
+            console.log(response);
+            $("#result").addClass("alert alert-danger").text("No es posible guardar los datos.");
+            $("#result").alert();
         }
     });
 }
