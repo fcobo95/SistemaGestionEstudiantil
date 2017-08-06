@@ -88,18 +88,23 @@ def agregueRegistro():
 
 @app.route('/nuevoProfesor', methods=['POST'])
 def nuevoProfesor():
-    laIdentificacion = request.form['identificacion']
-    elNombre = request.form['nombre']
-    elPrimerApellido = request.form['primerApellido']
-    elSegundoApellido = request.form['segundoApellido']
-    elTelefono = request.form['telefono']
-    elTelefonoComoNumero = int(elTelefono)
+    laIdentificacion = request.json['identificacion']
+    elNombre = request.json['nombre']
+    elPrimerApellido = request.json['primerApellido']
+    elSegundoApellido = request.json['segundoApellido']
+    elTelefono = request.json['telefono']
+    elCorreo = request.json['correo']
+
+    if (elTelefono != ''):
+        elTelefonoComoNumero = int(elTelefono)
+    else:
+        elTelefonoComoNumero = ''
 
     try:
-        laConsulta = 'INSERT INTO PROFESOR(IDENTIFICACION, NOMBRE, APELLIDO1, APELLIDO2,TELEFONO) ' \
-                     'VALUES (:1, :2, :3, :4, :5)'
+        laConsulta = 'INSERT INTO PROFESOR(IDENTIFICACION, NOMBRE, APELLIDO1, APELLIDO2,TELEFONO,CORREO) ' \
+                     'VALUES (:1, :2, :3, :4, :5, :6)'
         elCursor.execute(laConsulta,
-                         (laIdentificacion, elNombre, elPrimerApellido, elSegundoApellido, elTelefonoComoNumero))
+                         (laIdentificacion, elNombre, elPrimerApellido, elSegundoApellido, elTelefonoComoNumero, elCorreo))
         laBaseDeDatos.commit()
 
         elTexto = "Los datos se han ingresado con éxito"
