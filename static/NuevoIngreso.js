@@ -2,8 +2,8 @@ function agregarNuevoIngreso() {
 
     var idEstudiante = $("#idEstudiante").val();
     var nombreEstudiante = $("#nombreEstudiante").val();
-    var apellidoEstudiante1 = $("#email").val();
-    var apellidoEstudiante2 = $("#user").val();
+    var apellidoEstudiante1 = $("#apellido1").val();
+    var apellidoEstudiante2 = $("#apellido2").val();
     var sexo = $("#sexo").val();
     var fechaNacimiento = $("#nacimiento").val();
     var ciclo = $("#ciclo").val();
@@ -34,14 +34,25 @@ function agregarNuevoIngreso() {
         direccion: direccion,
         correo: correo});
 
+        //TODO: REPUESTA CORRECTA (NO SOLO SUCCESS)
+
     $.ajax({
-        "async": true,
-        "url": "/nuevoRegistro",
-        "method": "POST",
-        "dataType": "json",
-        "processData": false,
-        "data": losDatos,
-        success: function (response) {
+      "async": true,
+      "crossDomain": true,
+      "url": "http://127.0.0.1:5000/nuevoRegistro",
+      "method": "POST",
+      "headers": {
+        "content-type": "application/json",
+      },
+      "processData": false,
+      "data": losDatos,
+      success: function (response) {
+            console.log(response);
+            $("#result").addClass("alert alert-info").text(response);
+            $("#result").alert();
+        }
+
+       /*  success: function (response) {
             console.log(response);
             $("#result").addClass("alert alert-success").text("Lo datos se han almacenado correctamente.");
             $("#result").alert();
@@ -51,5 +62,6 @@ function agregarNuevoIngreso() {
             $("#result").addClass("alert alert-danger").text("No es posible guardar los datos.");
             $("#result").alert();
         }
+        */
     });
 }

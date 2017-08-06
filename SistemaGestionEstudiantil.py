@@ -1,5 +1,6 @@
 from flask import Flask, request, json, Response, redirect, render_template
 import cx_Oracle
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -35,6 +36,7 @@ def muestreFormularioProfesor():
 def agregueRegistro():
     # Se reciben datos del estudiante y del encargado. Se ingresan a la BD primero los del encargado
     # TODO: OPCIÓN PARA SELECCIONAR ENCARGADO EXISTENTE A UN NUEVO ALUMNO (CREAR NUEVO ENCARGADO O SELECCIONAR)
+    #TODO: ARREGLAR FORMATO DE FECHA
 
     # Datos estudiante
     laIdentificacion = request.json['identificacion']
@@ -48,6 +50,11 @@ def agregueRegistro():
     laSeccion = request.json['seccion']
     elNivelComoNumero = int(elNivel)
 
+    if elSexo=='Masculino':
+        elSexoComoChar = "M"
+    if elSexo == 'Femenino':
+        elSexoComoChar = "F"
+
     # Datos encargado
     laIdentificacionEncargado = request.json['IDencargado']  # Id del encargado que se asocia a estudiante
     elNombreEncargado = request.json['nombreEncargado']
@@ -57,9 +64,6 @@ def agregueRegistro():
     elCorreo = request.json['correo']
     elTelefonoComoNumero = int(elTelefono)
 
-    print(laIdentificacion, elNombre, elPrimerApellido, elSegundoApellido, elSexo, laFechaNacimiento, elCiclo, elNivel,
-          laSeccion, elNivelComoNumero)
-    print(laIdentificacion, elNombreEncargado, elTelefono, laDireccion, elTelefonoComoNumero)
     try:
 
         laConsulta = 'INSERT INTO ENCARGADO(IDENTIFICACION, NOMBRE_COMPLETO, TELEFONO, PARENTESCO, DIRECCION, CORREO) ' \
@@ -72,8 +76,9 @@ def agregueRegistro():
         laConsulta = 'INSERT INTO ESTUDIANTE (IDENTIFICACION, NOMBRE, APELLIDO1, APELLIDO2, SEXO, FECHA_NACIMIENTO, ' \
                      'CICLO, NIVEL, SECCION, ENCARGADO) VALUES (:1,:2, :3, :4, :5, :6, :7, :8, :9, :10)'
         elCursor.execute(laConsulta,
-                         (laIdentificacion, elNombre, elPrimerApellido, elSegundoApellido, elSexo,
-                          laFechaNacimiento, elCiclo, elNivelComoNumero, laSeccion, laIdentificacionEncargado))
+                         (laIdentificacion, elNombre, elPrimerApellido, elSegundoApellido, elSexoComoChar,
+                         laFechaNacimiento, elCiclo.upper(), elNivelComoNumero, laSeccion, laIdentificacionEncargado))
+        # datetime.strptime(laFechaNacimiento, "%d%m%Y")
         laBaseDeDatos.commit()
 
         elTexto = "Los datos se han ingresado con éxito"
@@ -81,6 +86,7 @@ def agregueRegistro():
         return Response(laRespuesta, 200, mimetype="application/json")
 
     except Exception as e:
+        print(e)
         elTexto = "Error: Imposible almacenar los datos"
         laRespuesta = json.dumps(elTexto)
         return Response(laRespuesta, 200, mimetype="application/json")
@@ -88,6 +94,7 @@ def agregueRegistro():
 
 @app.route('/nuevoProfesor', methods=['POST'])
 def nuevoProfesor():
+    print(request.json)
     laIdentificacion = request.json['identificacion']
     elNombre = request.json['nombre']
     elPrimerApellido = request.json['primerApellido']
@@ -95,7 +102,7 @@ def nuevoProfesor():
     elTelefono = request.json['telefono']
     elCorreo = request.json['correo']
 
-    if (elTelefono != ''):
+    if elTelefono != '' and elTelefono != 0:
         elTelefonoComoNumero = int(elTelefono)
     else:
         elTelefonoComoNumero = ''
@@ -107,14 +114,15 @@ def nuevoProfesor():
                          (laIdentificacion, elNombre, elPrimerApellido, elSegundoApellido, elTelefonoComoNumero, elCorreo))
         laBaseDeDatos.commit()
 
-        elTexto = "Los datos se han ingresado con éxito"
+        elTexto = "Los datos se han ingresado con éxito."
         laRespuesta = json.dumps(elTexto)
         return Response(laRespuesta, 200, mimetype="application/json")
 
     except Exception as e:
-        elTexto = "Error: Imposible almacenar los datos"
+        print(e)
+        elTexto = "¡ERROR! Imposible almacenar los datos."
         laRespuesta = json.dumps(elTexto)
-        return Response(laRespuesta, 200, mimetype="application/json")
+        return Response(laRespuesta, mimetype="application/json")
 
 
 @app.route('/profesorMateria', methods=['POST'])
