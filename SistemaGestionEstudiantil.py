@@ -31,6 +31,10 @@ def muestreFormulario():
 def muestreFormularioProfesor():
     return render_template('NuevoProfesor.html')
 
+@app.route('/Consultas')
+def consulte():
+    return render_template('Consultas.html')
+
 #TODO: MÉTODO PARA ERRORES
 @app.route('/nuevoRegistro', methods=['POST'])
 def agregueRegistro():

@@ -2,18 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Consultas</title>
+    <title>NuevoAlumno</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='Consultas.js') }}"></script>
 </head>
 <body>
-
-<div id="wrapper">
-    <header>
-
-    </header>
+<div class="text-center">
+    <h1>Consulta de informes</h1>
 </div>
-<footer>
-
-</footer>
-
+<div class="container">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="ciclo">Ciclo:</label>
+            <div class="col-sm-4">
+                <select class="form-control" id="ciclo" onchange="modificarNivel()">
+                    <option></option>
+                    <option>Primer</option>
+                    <option>Segundo</option>
+                    <option>Tercer</option>
+                    <option>Cuarto</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="nivel">Nivel:</label>
+            <div class="col-sm-4">
+                <select class="form-control" id="nivel">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="seccion">Seccion:</label>
+            <div class="col-sm-4">
+                <select class="form-control" id="seccion">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="estudiante">Estudiante:</label>
+            <div class="col-sm-4">
+                <select class="form-control" id="estudiante">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
 </body>
 </html>
