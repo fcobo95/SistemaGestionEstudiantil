@@ -194,6 +194,26 @@ def asigneCalificaciones():
 def actualiceRegistro():
     return ''
 
+@app.route('/obtengaSecciones', methods=['POST'])
+def obtengaSecciones():
+    elNivel = request.json['nivel']
+    lasSecciones = []
+    try:
+        laConsulta = 'SELECT SECCION FROM ESTUDIANTE WHERE NIVEL=' + elNivel + ' GROUP BY SECCION'
+        elCursor.execute(laConsulta)
+        for cadaResultado in elCursor:
+            lasSecciones.append(cadaResultado[0])
+
+        elJSON = {'secciones': lasSecciones}
+        laRespuesta = json.dumps(elJSON)
+        return Response(laRespuesta, 200, mimetype="application/json")
+
+    except Exception as e:
+        print(e)
+        elTexto = "Error: Imposible obtener los datos"
+        laRespuesta = json.dumps(elTexto)
+        return Response(laRespuesta, 200, mimetype="application/json")
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000, host='0.0.0.0')
