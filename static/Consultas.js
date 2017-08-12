@@ -1,5 +1,7 @@
 function modificarNivel(){
 
+    $(".alert").hide()
+
     var elMenuDeCiclos = document.getElementById("ciclo");
     var elCiclo = elMenuDeCiclos.options[elMenuDeCiclos.selectedIndex].text;
 
@@ -44,6 +46,9 @@ function modificarNivel(){
         }
         break;
 
-        default: alert('Seleccione un ciclo.');
+        default:
+            $("#errorCiclo").show()
+            //$("#result").addClass("alert alert-warning").text("Seleccione un ciclo.");
+            //$("#result").alert();
     }
 }
