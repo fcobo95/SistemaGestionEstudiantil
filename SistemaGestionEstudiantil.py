@@ -214,6 +214,34 @@ def obtengaSecciones():
         laRespuesta = json.dumps(elTexto)
         return Response(laRespuesta, 200, mimetype="application/json")
 
+@app.route('/obtengaEstudiantes', methods=['POST'])
+def obtengaEstudiantes():
+    laSeccion = request.json['seccion']
+    losEstudiantes = {}
+    try:
+        laConsulta = "SELECT IDENTIFICACION, NOMBRE, APELLIDO1, APELLIDO2 FROM ESTUDIANTE WHERE SECCION=" \
+                     + "'" + laSeccion + "'"
+        elCursor.execute(laConsulta)
+        elContador = 1
+        for cadaResultado in elCursor:
+            laIdentificacion = cadaResultado[0]
+            elNombre = cadaResultado[1]
+            elApellido1 = cadaResultado[2]
+            elApellido2 = cadaResultado[3]
+
+            losEstudiantes[elContador] = {"identificacion":laIdentificacion, "nombre":elNombre,
+                                          "apellido1":elApellido1, "apellido2":elApellido2}
+            elContador+=1
+
+        laRespuesta = json.dumps(losEstudiantes)
+        return Response(laRespuesta, 200, mimetype="application/json")
+
+    except Exception as e:
+        print(e)
+        elTexto = "Error: Imposible obtener los datos"
+        laRespuesta = json.dumps(elTexto)
+        return Response(laRespuesta, 200, mimetype="application/json")
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000, host='0.0.0.0')
