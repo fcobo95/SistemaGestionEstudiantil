@@ -28,6 +28,9 @@
                     <div class="alert alert-warning" role="alert" id="errorNivel" hidden="True">
                         <strong>¡Advertencia!</strong> Seleccione un nivel para continuar.
                     </div>
+                    <div class="alert alert-warning" role="alert" id="errorSeccion" hidden="True">
+                        <strong>¡Advertencia!</strong> Seleccione una sección para continuar.
+                    </div>
                 </div>
             </div>
         </div>
@@ -58,7 +61,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4" for="seccion">Seccion:</label>
             <div class="col-sm-4">
-                <select class="form-control" id="seccion">
+                <select class="form-control" id="seccion" onchange="modificarEstudiante()">
                     <option></option>
                 </select>
             </div>
