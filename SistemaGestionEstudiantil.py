@@ -38,9 +38,9 @@ def consulte():
 #TODO: MÉTODO PARA ERRORES
 @app.route('/nuevoRegistro', methods=['POST'])
 def agregueRegistro():
+    print(request.json)
     # Se reciben datos del estudiante y del encargado. Se ingresan a la BD primero los del encargado
     # TODO: OPCIÓN PARA SELECCIONAR ENCARGADO EXISTENTE A UN NUEVO ALUMNO (CREAR NUEVO ENCARGADO O SELECCIONAR)
-    #TODO: ARREGLAR FORMATO DE FECHA
 
     # Datos estudiante
     laIdentificacion = request.json['identificacion']
@@ -58,6 +58,12 @@ def agregueRegistro():
         elSexoComoChar = "H"
     if elSexo == 'Mujer':
         elSexoComoChar = "M"
+
+    laFechaDividida = laFechaNacimiento.split("-")
+    elAno = laFechaDividida[0]
+    elMes = laFechaDividida[1]
+    elDia = laFechaDividida[2]
+    laFechaFormateada =  elDia+"/"+elMes+"/"+elAno
 
     # Datos encargado
     laIdentificacionEncargado = request.json['IDencargado']  # Id del encargado que se asocia a estudiante
@@ -81,7 +87,7 @@ def agregueRegistro():
                      'CICLO, NIVEL, SECCION, ENCARGADO) VALUES (:1,:2, :3, :4, :5, :6, :7, :8, :9, :10)'
         elCursor.execute(laConsulta,
                          (laIdentificacion, elNombre, elPrimerApellido, elSegundoApellido, elSexoComoChar,
-                         laFechaNacimiento, elCiclo.upper(), elNivelComoNumero, laSeccion, laIdentificacionEncargado))
+                         laFechaFormateada, elCiclo.upper(), elNivelComoNumero, laSeccion, laIdentificacionEncargado))
         # datetime.strptime(laFechaNacimiento, "%d%m%Y")
         laBaseDeDatos.commit()
 
