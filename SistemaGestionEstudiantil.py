@@ -54,10 +54,10 @@ def agregueRegistro():
     laSeccion = request.json['seccion']
     elNivelComoNumero = int(elNivel)
 
-    if elSexo=='Masculino':
+    if elSexo=='Hombre':
+        elSexoComoChar = "H"
+    if elSexo == 'Mujer':
         elSexoComoChar = "M"
-    if elSexo == 'Femenino':
-        elSexoComoChar = "F"
 
     # Datos encargado
     laIdentificacionEncargado = request.json['IDencargado']  # Id del encargado que se asocia a estudiante
