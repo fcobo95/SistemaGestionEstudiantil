@@ -137,8 +137,10 @@ CREATE TABLE CONVOCATORIA
 -- INGRESAR REGISTROS 
 
 INSERT INTO ENCARGADO VALUES ('11111111', 'Temporal', 88888888, 'Temporal', 'Temporal', 'temp@temp.com');
-INSERT INTO ENCARGADO VALUES ('155819859916', 'Harly de los Angeles', 88888888, 'Temporal', 'Temporal', 'temp@temp.com');
-INSERT INTO ENCARGADO VALUES ('109430586', 'Maria Ivannia Arroyo Vargas', 88888888, 'Temporal', 'Temporal', 'temp@temp.com');
+INSERT INTO ENCARGADO
+VALUES ('155819859916', 'Harly de los Angeles', 88888888, 'Temporal', 'Temporal', 'temp@temp.com');
+INSERT INTO ENCARGADO
+VALUES ('109430586', 'Maria Ivannia Arroyo Vargas', 88888888, 'Temporal', 'Temporal', 'temp@temp.com');
 
 -- PRIMERO UNO
 -- INSERT INTO ESTUDIANTE VALUES ('120790159', 'CELESTE', 'ACUNA', 'CADRANO', 'F', '04/02/2010', 'SEGUNDO', 1, '1-1', '11111111');
