@@ -157,8 +157,19 @@ function modificarEstudiante(){
 
 function cargarInformeHogar(){
     $("#informe").load("informeHogar");
+    $("#botonImprimir").show();
 }
 
 function cargarFormula14() {
     $("#informe").load("formula14");
+    $("#botonImprimir").show();
+}
+
+function imprimirInforme() {
+     var printContents = document.getElementById("#informe");
+     //var newWindow = window.open();
+     //newWindow.document.write(printContents);
+     //newWindow.document.close();
+     //window.print();
+
 }
