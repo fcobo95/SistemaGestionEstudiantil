@@ -43,6 +43,10 @@ def muestreInformeHogar():
 def muestreFormula14():
     return render_template('Formula14.html')
 
+@app.route('/Notas')
+def asigneNotas():
+    return render_template('AsignacionNotas.html')
+
 #TODO: MÉTODO PARA ERRORES
 @app.route('/nuevoRegistro', methods=['POST'])
 def agregueRegistro():
@@ -256,6 +260,30 @@ def obtengaEstudiantes():
         laRespuesta = json.dumps(elTexto)
         return Response(laRespuesta, 200, mimetype="application/json")
 
+@app.route('/obtengaMaterias', methods=['POST'])
+def obtengaMaterias():
+    elNivel = request.json['nivel']
+    lasMaterias = {}
+    print(elNivel)
+    try:
+        laConsulta = "SELECT IDENTIFICACION, NOMBRE FROM MATERIA WHERE NIVEL=" + elNivel
+        elCursor.execute(laConsulta)
+        elContador = 1
+        for cadaResultado in elCursor:
+            laIdentificacion = cadaResultado[0]
+            elNombre = cadaResultado[1]
+
+            lasMaterias[elContador] = {"identificacion":laIdentificacion, "nombre":elNombre}
+            elContador+=1
+
+        laRespuesta = json.dumps(lasMaterias)
+        return Response(laRespuesta, 200, mimetype="application/json")
+
+    except Exception as e:
+        print(e)
+        elTexto = "Error: No se pueden mostrar las materias"
+        laRespuesta = json.dumps(elTexto)
+        return Response(laRespuesta, 200, mimetype="application/json")
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000, host='0.0.0.0')

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calificaciones</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='Consultas.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='AsignacionNotas.js') }}"></script>
+
+</head>
+<body>
+<div class="text-center">
+    <h1>Asignación de calificaciones</h1>
+</div>
+<div class="container">
+ <form class="form-horizontal">
+ <div class="form-group">
+        <label class="control-label col-sm-4" for="ciclo">Ciclo:</label>
+        <div class="col-sm-4">
+            <select class="form-control" id="ciclo" onchange="modificarNivel()">
+                <option></option>
+                <option>Primer</option>
+                <option>Segundo</option>
+                <option>Tercer</option>
+                <option>Cuarto</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-4" for="nivel">Nivel:</label>
+        <div class="col-sm-4">
+            <select class="form-control" id="nivel" onchange="modificarSeccion()">
+                <option></option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-4" for="seccion">Seccion:</label>
+        <div class="col-sm-4">
+            <select class="form-control" id="seccion" onchange="muestreMaterias(); muestreEstudiantes()">
+                <option></option>
+            </select>
+        </div>
+    </div>
+     <div class="form-group">
+        <table id="tabla">
+            <tr>
+            </tr>
+
+        </table>
+    </div>
+ </form>
+</div>
+</body>
+</html>
+
