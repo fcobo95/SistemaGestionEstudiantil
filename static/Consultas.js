@@ -154,3 +154,11 @@ function modificarEstudiante(){
         });
     }
 }
+
+function cargarInformeHogar(){
+    $("#informe").load("informeHogar");
+}
+
+function cargarFormula14() {
+    $("#informe").load("formula14");
+}

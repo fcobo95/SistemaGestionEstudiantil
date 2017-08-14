@@ -35,6 +35,14 @@ def muestreFormularioProfesor():
 def consulte():
     return render_template('Consultas.html')
 
+@app.route('/informeHogar')
+def muestreInformeHogar():
+    return render_template('PlantillaInformaHogar.html')
+
+@app.route('/formula14')
+def muestreFormula14():
+    return render_template('Formula14.html')
+
 #TODO: MÉTODO PARA ERRORES
 @app.route('/nuevoRegistro', methods=['POST'])
 def agregueRegistro():

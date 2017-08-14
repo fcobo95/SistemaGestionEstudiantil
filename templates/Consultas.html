@@ -9,6 +9,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='Consultas.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="../static/CSS/Consultas.css"/>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
 </head>
 <body>
 <div class="container">
@@ -76,6 +78,19 @@
             </div>
         </div>
     </form>
+    <div class="row" id="botones">
+        <div class="col-md-6">
+            <div class="text-center">
+                <button type="button" class="btn btn-default btn-block" onclick="cargarInformeHogar()">Informe Hogar</button>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <button type="button" class="btn btn-default btn-block" onclick="cargarFormula14()">Fórmula 14</button>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div id="informe"></div>
 </div>
 </body>
 </html>
