@@ -1,4 +1,43 @@
+function login_function() {
+    /* ******************************************************************
+     *
+     * AQUI LO QUE SE HACE ES VALIDAR QUE LOS
+     * CAMPOS DE USUERNAME Y PASSWORD NO ESTEN
+     * VACIOS, DE ESTARLO, LE ENVIA AL USUARIO
+     * UN ALERT, PARA AVISARLE QUE SUS DATOS
+     * NO HAN SIDO INGRESADOS, QUE LOS INGRESE.
+     *
+     * EN CASO DE HABER PUESTO TODOS LOS DATOS
+     * EL AJAX SE HACE EFECTIVO.
+     *
+     * ***************************************************************** */
 
-$('.message a').click(function(){
-   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
-});
+    var username = $("#username").val();
+    var password = $("#password").val();
+    if (username === "" || password === "") {
+        alert("Error: Ingrese su usuario y contraseña.")
+    } else {
+        var settings = {
+            "async": true,
+            "url": "/Login",
+            "method": "GET",
+            "headers": {
+                "authorization": "Basic " + btoa(username + ":" + password)
+            },
+            success: function (response) {
+                console.log(response);
+                alert("Welcome, " + username + "!");
+                document.cookie = "authorization=Basic " + response['Token'];
+                window.location.href = "../templates/MenuFormularios.html";
+            },
+            error: function (response) {
+                console.log(response);
+                alert("Error: " + response['statusText'])
+            }
+        };
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+        });
+    }
+}
