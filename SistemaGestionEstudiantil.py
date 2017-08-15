@@ -329,7 +329,6 @@ def obtengaEstudiantes():
 def obtengaMaterias():
     elNivel = request.json['nivel']
     lasMaterias = {}
-    print(elNivel)
     try:
         laConsulta = "SELECT IDENTIFICACION, NOMBRE FROM MATERIA WHERE NIVEL=" + elNivel
         elCursor.execute(laConsulta)
@@ -350,6 +349,52 @@ def obtengaMaterias():
         laRespuesta = json.dumps(elTexto)
         return Response(laRespuesta, 200, mimetype="application/json")
 
+@app.route('/datosInformeHogar', methods=['POST'])
+def obtenerDatosInformeHogar():
+    laIdentificacion = request.json['identificacion']
+    elAno = request.json['ano']
+    losDatos = {}
+
+
+    try:
+        laPrimeraConsulta = "SELECT NOMBRE, APELLIDO1, APELLIDO2, CICLO, NIVEL, SECCION FROM ESTUDIANTE WHERE IDENTIFICACION='" + laIdentificacion + "'"
+        elCursor.execute(laPrimeraConsulta)
+        elEstudiante = elCursor.fetchone()
+        print(elEstudiante)
+        elNombre = elEstudiante[0]
+        elApellido1 = elEstudiante[1]
+        elApellido2 = elEstudiante[2]
+        elCiclo = elEstudiante[3]
+        elNivel = elEstudiante[4]
+        elNivelComoTexto = str(elNivel)
+        laSeccion = elEstudiante[5]
+
+        losDatos["datos"] = {"nombre": elNombre, "apellido1": elApellido1, "apellido2": elApellido2,
+                             "ciclo": elCiclo, "nivel": elNivelComoTexto, "seccion": laSeccion}
+
+        laSegundaConsulta = "SELECT PERIODO1, PERIODO2, PERIODO3, RESULTADO_FINAL, CONDICION FROM CALIFICACION " \
+                            "WHERE ESTUDIANTE='" + laIdentificacion + "' AND ANO=" + elAno
+
+        elCursor.execute(laSegundaConsulta)
+        lasNotas = elCursor.fetchone()
+        print(lasNotas)
+        elPeriodo1 = lasNotas[0]
+        elPeriodo2 = lasNotas[1]
+        elPeriodo3 = lasNotas[2]
+        elResultadoFinal = lasNotas[3]
+        laCondicion = lasNotas[4]
+
+        losDatos["notas"] = {"periodo1": elPeriodo1, "periodo2": elPeriodo2, "periodo3": elPeriodo3,
+                             "final": elResultadoFinal, "condicion": laCondicion}
+
+        laRespuesta = json.dumps(losDatos)
+        return Response(laRespuesta, 200, mimetype="application/json")
+
+    except Exception as e:
+        print(e)
+        elTexto = "Error: Imposible obtener los datos"
+        laRespuesta = json.dumps(elTexto)
+        return Response(laRespuesta, 200, mimetype="application/json")
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000, host='0.0.0.0')

@@ -166,10 +166,9 @@ function cargarFormula14() {
 }
 
 function imprimirInforme() {
-     var printContents = document.getElementById("#informe");
-     //var newWindow = window.open();
-     //newWindow.document.write(printContents);
-     //newWindow.document.close();
-     //window.print();
-
+     var printContents = document.getElementById("informe").innerHTML;
+     var newWindow = window.open();
+     newWindow.document.write(printContents);
+     newWindow.print();
+     newWindow.close();
 }
