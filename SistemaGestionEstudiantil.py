@@ -5,7 +5,7 @@ import cx_Oracle
 from datetime import datetime
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'JE9395ccce'
+app.config['SECRET_KEY'] = 'DJE969395cmccce'
 auth = HTTPBasicAuth()
 
 # Conexión a base de datos (Oracle Express Edition 11g)
