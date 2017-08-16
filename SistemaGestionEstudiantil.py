@@ -1,8 +1,8 @@
-from flask import Flask, request, json, Response, redirect, render_template
+from flask import Flask, request, json, jsonify, Response, redirect, render_template
 from flask_httpauth import HTTPBasicAuth
 from itsdangerous import (TimedJSONWebSignatureSerializer as Serializer, BadSignature, SignatureExpired)
 import cx_Oracle
-from datetime import datetime
+import base64
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'DJE969395cmccce'
@@ -26,12 +26,10 @@ def verifiqueLaContrasena(usuario_o_token, password):
         laConsultaDelPass = 'SELECT PASSWORD FROM USUARIO'
         elUsuarioConsultado = elCursor.execute(laConsultaDelUser)
         elPasswordConsultado = elCursor.execute(laConsultaDelPass)
-
         laAutorizacion = request.cookies.get('authorization')
-
-        if usuario_o_token == '' and laAutorizacion is None:
+        if usuario_o_token == "" and laAutorizacion is None:
             return False
-        elToken = laAutorizacion[:6]
+        elToken = laAutorizacion[6:]
         elUsuario = verifiqueElToken(elToken)
         if elUsuario is None:
             elUsuario = elUsuarioConsultado
@@ -45,25 +43,22 @@ def verifiqueLaContrasena(usuario_o_token, password):
         return formateeElError(e)
 
 
-def verifiqueElToken(token):
-    laSerie = Serializer(app.config['SECRET_KEY'])
+@app.route('/api/Login')
+@auth.login_required
+def obtengaElToken():
     try:
-        losDatos = laSerie.loads(token)
-    except SignatureExpired:
-        return None
-    except BadSignature:
-        return None
-    elUsuario = losDatos['Usuario']
-    print(elUsuario)
-    return elUsuario
-
-
-def formateeElError(e):
-    elErrorComoTexto = str(e)
-    elEnunciado = "Lo lamento. Ha ocurrido un error " + elErrorComoTexto
-    elEnunciadoComoJSON = json.dumps(elEnunciado)
-    elErrorHTTP = elErrorComoTexto[:3]
-    return Response(elEnunciadoComoJSON, elErrorHTTP, mimetype="application/json")
+        laAutorizacion = request.headers.get('authorization')
+        elCodigo = laAutorizacion[6:]
+        laAutenticacion = base64.b64decode(elCodigo)
+        laAutenticacionComoTexto = laAutenticacion.decode("utf-8")
+        losCredenciales = laAutenticacionComoTexto.split(':')
+        elUsuario = losCredenciales[0]
+        laContrasena = losCredenciales[1]
+        elToken = genereElToken(elUsuario, laContrasena)
+        laRespuesta = {'Token': elToken.decode('ascii')}
+        return jsonify(laRespuesta)
+    except Exception as e:
+        return formateeElError(e)
 
 
 @app.route('/')
@@ -87,6 +82,7 @@ def muestreFormularioProfesor():
 
 
 @app.route('/Consultas')
+@auth.login_required
 def consulte():
     return render_template('Consultas.html')
 
@@ -349,6 +345,50 @@ def obtengaMaterias():
         elTexto = "Error: No se pueden mostrar las materias"
         laRespuesta = json.dumps(elTexto)
         return Response(laRespuesta, 200, mimetype="application/json")
+
+
+def definaElUsuario():
+    elUsuario = auth.username()
+    if elUsuario == "":
+        laAutorizacion = request.headers.get('authorization')
+        if laAutorizacion is None:
+            elUsuario = request.remote_addr
+        else:
+            elCodigo = laAutorizacion[6:]
+            laAutenticacion = base64.b64decode(elCodigo)
+            elToken = laAutenticacion.decode("utf-8")
+            elUsuario = verifiqueElToken(elToken)
+    return elUsuario
+
+
+def formateeElError(e):
+    elErrorComoTexto = str(e)
+    elEnunciado = "Lo lamento. Ha ocurrido un error " + elErrorComoTexto
+    elEnunciadoComoJSON = json.dumps(elEnunciado)
+    elErrorHTTP = elErrorComoTexto[:3]
+    return Response(elEnunciadoComoJSON, elErrorHTTP, mimetype="application/json")
+
+
+def genereElToken(usuario, contrasena, expiration=1800):
+    laSerie = Serializer(app.config['SECRET_KEY'], expires_in=expiration)
+    elToken = laSerie.dumps(
+        {'Usuario': usuario,
+         'Contrasena': contrasena
+         })
+    return elToken
+
+
+def verifiqueElToken(token):
+    laSerie = Serializer(app.config['SECRET_KEY'])
+    try:
+        losDatos = laSerie.loads(token)
+    except SignatureExpired:
+        return None
+    except BadSignature:
+        return None
+    elUsuario = losDatos['Usuario']
+    print(elUsuario)
+    return elUsuario
 
 
 if __name__ == '__main__':

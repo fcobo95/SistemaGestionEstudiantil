@@ -19,7 +19,7 @@ function login_function() {
     } else {
         var settings = {
             "async": true,
-            "url": "/Login",
+            "url": "/api/Login",
             "method": "GET",
             "headers": {
                 "authorization": "Basic " + btoa(username + ":" + password)
@@ -28,7 +28,7 @@ function login_function() {
                 console.log(response);
                 alert("Welcome, " + username + "!");
                 document.cookie = "authorization=Basic " + response['Token'];
-                window.location.href = "../templates/MenuFormularios.html";
+                window.location.href = "/Consultas.html";
             },
             error: function (response) {
                 console.log(response);

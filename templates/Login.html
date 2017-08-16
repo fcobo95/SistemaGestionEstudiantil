@@ -9,10 +9,14 @@
 <body>
 <div class="login-page">
     <div class="form">
-        <form class="login-form">
+        <form class="login-form" method="post" name="login" id="login">
+
             <input type="text" placeholder="username" id="username"/>
+
             <input type="password" placeholder="password" id="password"/>
-            <button>login</button>
+
+            <button onclick="login_function()">login</button>
+
         </form>
     </div>
 </div>
