@@ -1,0 +1,45 @@
+.header-formula14 {
+    font-weight: bold;
+    text-align: center;
+}
+
+.blank {
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+}
+
+#table-headers {
+    border-width: 3px;
+    border-style: solid;
+    border-color: black;
+}
+
+.campos-formula14-h {
+    border-style: solid;
+    border-color: black;
+    text-align: center;
+}
+
+.campos-formula14 {
+    font-weight: bold;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    text-align: center;
+}
+
+.letter {
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    text-align: left;
+    font-weight: 100;
+}
+
+img {
+    margin: 10px 0 0 0;
+    float: left;
+    width: 60px;
+    height: 60px;
+}
