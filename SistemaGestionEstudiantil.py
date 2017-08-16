@@ -20,6 +20,7 @@ elCursor.execute(laConsulta)
 for each_item1 in elCursor:
     print(each_item1)
 
+
 # TODO: FALTA REVISAR CON JOSHUA.
 @auth.verify_password
 def verifiqueLaContrasena(usuario_o_token, password):
