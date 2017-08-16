@@ -345,12 +345,12 @@ def obtengaMaterias():
         laRespuesta = json.dumps(elTexto)
         return Response(laRespuesta, 200, mimetype="application/json")
 
+
 @app.route('/datosInformeHogar', methods=['POST'])
 def obtenerDatosInformeHogar():
     laIdentificacion = request.json['identificacion']
     elAno = request.json['ano']
     losDatos = {}
-
 
     try:
         laPrimeraConsulta = "SELECT NOMBRE, APELLIDO1, APELLIDO2, CICLO, NIVEL, SECCION FROM ESTUDIANTE WHERE IDENTIFICACION='" + laIdentificacion + "'"
@@ -391,6 +391,7 @@ def obtenerDatosInformeHogar():
         elTexto = "Error: Imposible obtener los datos"
         laRespuesta = json.dumps(elTexto)
         return Response(laRespuesta, 200, mimetype="application/json")
+
 
 def definaElUsuario():
     elUsuario = auth.username()
