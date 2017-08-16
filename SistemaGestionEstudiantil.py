@@ -13,10 +13,12 @@ TNS = cx_Oracle.makedsn('localhost', 1521, 'XE')
 laBaseDeDatos = cx_Oracle.connect('TCU', 'oracle', TNS)  # usuario/contraseña
 elCursor = laBaseDeDatos.cursor()
 
+# Si imprime bien los datos del usuario, esto quiere decir que si esta podiendo leer bien los datos.
+laConsulta = 'SELECT * FROM USUARIO'
+elCursor.execute(laConsulta)
 
-# elCursor.execute('SELECT * FROM ESTUDIANTE')
-# for registro in elCursor:
-#    print(registro)
+for each_item1 in elCursor:
+    print(each_item1)
 
 # TODO: FALTA REVISAR CON JOSHUA.
 @auth.verify_password
@@ -26,6 +28,7 @@ def verifiqueLaContrasena(usuario_o_token, password):
         laConsultaDelPass = 'SELECT PASSWORD FROM USUARIO'
         elUsuarioConsultado = elCursor.execute(laConsultaDelUser)
         elPasswordConsultado = elCursor.execute(laConsultaDelPass)
+        print(elUsuarioConsultado + " " + elPasswordConsultado)
         laAutorizacion = request.cookies.get('authorization')
         if usuario_o_token == "" and laAutorizacion is None:
             return False
