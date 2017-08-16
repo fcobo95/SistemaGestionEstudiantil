@@ -34,6 +34,12 @@
                     <div class="alert alert-warning" role="alert" id="errorSeccion" hidden="True">
                         <strong>¡Advertencia!</strong> Seleccione una sección para continuar.
                     </div>
+                    <div class="alert alert-warning" role="alert" id="errorEstudiante" hidden="True">
+                        <strong>¡Advertencia!</strong> Seleccione un estudiante para continuar.
+                    </div>
+                    <div class="alert alert-warning" role="alert" id="errorAno" hidden="True">
+                        <strong>¡Advertencia!</strong> Seleccione un año para continuar.
+                    </div>
                 </div>
             </div>
         </div>
@@ -72,7 +78,15 @@
         <div class="form-group">
             <label class="control-label col-sm-4" for="estudiante">Estudiante:</label>
             <div class="col-sm-4">
-                <select class="form-control" id="estudiante">
+                <select class="form-control" id="estudiante" onchange="modificarAnos()">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="ano">Año:</label>
+            <div class="col-sm-4">
+                <select class="form-control" id="ano">
                     <option></option>
                 </select>
             </div>

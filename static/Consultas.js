@@ -155,21 +155,72 @@ function modificarEstudiante(){
     }
 }
 
+function modificarAnos() {
+
+    $(".alert").hide()
+
+    var elMenuDeEstudiantes = document.getElementById("estudiante");
+    var elEstudiante = elMenuDeEstudiantes.options[elMenuDeEstudiantes.selectedIndex].text;
+    var elMenuDeAnos= document.getElementById("ano");
+    elAnoActual = new Date().getFullYear();
+
+    if (elEstudiante == ""){
+        $("#errorEstudiante").show()
+        $('#ano').empty();
+        var elementoVacio = document.createElement("option");
+        elementoVacio.text = "";
+        elMenuDeAnos.add(elementoVacio);
+    } else {
+        for (elContador = 0; elContador < 11; elContador++){
+            var nuevoElemento = document.createElement("option");
+            nuevoElemento.text = elAnoActual.toString();
+            elMenuDeAnos.add(nuevoElemento);
+            elAnoActual-=1
+        }
+    }
+}
+
 function cargarInformeHogar(){
+    traerDatos();
     $("#informe").load("informeHogar");
     $("#botonImprimir").show();
 }
 
 function cargarFormula14() {
+    traerDatos();
     $("#informe").load("formula14");
     $("#botonImprimir").show();
 }
 
 function imprimirInforme() {
-     var printContents = document.getElementById("#informe");
-     //var newWindow = window.open();
-     //newWindow.document.write(printContents);
-     //newWindow.document.close();
-     //window.print();
+     var printContents = document.getElementById("informe").innerHTML;
+     var newWindow = window.open();
+     newWindow.document.write(printContents);
+     newWindow.print();
+     newWindow.close();
+}
 
+function traerDatos(){
+    var elIndiceDelEstudiante = document.getElementById("estudiante").selectedIndex;
+    var laIdentificacion = sessionStorage.getItem(elIndiceDelEstudiante);
+    var elAno = document.getElementById("ano").value;
+    console.log(laIdentificacion);
+    console.log(elAno);
+
+    var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://127.0.0.1:5000/datosInformeHogar",
+    "method": "POST",
+    "headers": {
+        "content-type": "application/json",
+        "cache-control": "no-cache",
+    },
+    "processData": false,
+    "data": JSON.stringify({"identificacion": laIdentificacion, "ano": elAno})
+    }
+
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+    });
 }
