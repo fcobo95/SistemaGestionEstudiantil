@@ -1,5 +1,7 @@
+
 var laCantidadDeMaterias = 0;
-var table = document.createElement('table'), tr, td, fila, columna;
+var table = document.createElement('table'), tr, td, th, fila, columna;
+
 function muestreMaterias(){
     var elNivel = document.getElementById("nivel").value;
     var settings = {
@@ -18,22 +20,26 @@ function muestreMaterias(){
 
         $.ajax(settings).done(function (response) {
         laCantidadDeMaterias = Object.keys(response).length;
+        localStorage.setItem("materias",laCantidadDeMaterias);
 
         elContador = 1;
-        while (elContador < laCantidadDeMaterias+ 1) {
+        lasMaterias =[];
+        while (elContador < laCantidadDeMaterias + 1) {
             laIdentificacion = response[elContador.toString()]["identificacion"];
-            laMateria = response[elContador.toString()]["nombre"];
+            laMateria = response[elContador.toString()]["nombre"]+",";
+            lasMaterias += [laMateria]
+            lasMateriasSeparadas = lasMaterias.split(",");
             elContador+=1
         }
                for (fila = 0; fila < 1; fila++) {
                 tr = document.createElement('tr');
-                tr.innerHTML = "NOMBRE ESTUDIANTE";
+                tr.innerHTML = "ESTUDIANTE";
 
-             /*   for (columna = 0; columna < laCantidadDeMaterias; columna++) {
-                    td = document.createElement('td');
-                    tr.appendChild(td);
-                    td.innerHTML = laMateria;
-                }*/
+                for (columna = 0; columna < laCantidadDeMaterias; columna++) {
+                    th = document.createElement('th');
+                    tr.appendChild(th);
+                    th.innerHTML = lasMateriasSeparadas[columna];
+                }
                table.appendChild(tr);
             }
             document.getElementById('tabla').appendChild(table);
@@ -61,6 +67,7 @@ function muestreEstudiantes(){
 
             sessionStorage.clear();
             laCantidadDeEstudiantes = Object.keys(response).length;
+            localStorage.setItem("estudiantes",laCantidadDeEstudiantes);
 
             elContador = 1;
             while (elContador < laCantidadDeEstudiantes + 1) {
@@ -72,13 +79,16 @@ function muestreEstudiantes(){
 
                 sessionStorage.setItem(elContador, laIdentificacion);
 
-            for (fila = 1; fila < laCantidadDeEstudiantes; fila++) {
+            for (fila = laCantidadDeEstudiantes; fila >= laCantidadDeEstudiantes; fila--) {
                 tr = document.createElement('tr');
                 tr.innerHTML = elNombreCompleto;
                 for (columna = 1; columna < laCantidadDeMaterias; columna++) {
                     td = document.createElement('td');
                     tr.appendChild(td);
                     td.innerHTML = "";
+
+                    input = document.createElement('INPUT');
+                    td.appendChild(input);
                 }
                 table.appendChild(tr);
             }
@@ -87,13 +97,9 @@ function muestreEstudiantes(){
             elContador+=1
             }
         });
+        $("#btnEnvio").show();
 }
-
-function creeTabla() {
-
-}
-
-function enviarCalificacion() {
+function enviarDatos(){
 
 
 }
