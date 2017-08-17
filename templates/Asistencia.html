@@ -8,56 +8,56 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../static/CSS/Asistencia.css">
+    <script src="../static/Asistencia.js"></script>
 </head>
 <body>
 <img src="../static/resources/mep.png">
-<div class="table-responsive">
-    <table class="table" id="table-headers">
-        <tr>
-            <th class="campos-formula14-h">Estudiante</th>
-            <th class="campos-formula14-h">Periodo</th>
-            <th class="campos-formula14-h">Año</th>
-            <th class="campos-formula14-h">Tardias</th>
-            <th class="campos-formula14-h">Motivadas</th>
-            <th class="campos-formula14-h">Inmotivadas</th>
-        </tr>
+<div class="container">
+    <h3>Datos del estudiante</h3>
+    <form class="form-horizontal">
 
-        <tr>
-            <th class="campos-formula14-h"></th>
-            <th class="campos-formula14-h"></th>
-            <th class="campos-formula14-h"></th>
-            <th class="campos-formula14-h"></th>
-            <th class="campos-formula14-h"></th>
-            <th class="campos-formula14-h"></th>
-        </tr>
-
-        <tr>
-            <th class="campos-formula14-h"></th>
-            <th class="campos-formula14-h"></th>
-            <th class="campos-formula14-h"></th>
-            <th class="campos-formula14-h"></th>
-            <th class="campos-formula14-h"></th>
-            <th class="campos-formula14-h"></th>
-        </tr>
-
-        <tr>
-            <th class="campos-formula14-h"></th>
-            <th class="campos-formula14-h"></th>
-            <th class="campos-formula14-h"></th>
-            <th class="campos-formula14-h"></th>
-            <th class="campos-formula14-h"></th>
-            <th class="campos-formula14-h"></th>
-        </tr>
-
-        <tr>
-            <th class="campos-formula14-h"></th>
-            <th class="campos-formula14-h"></th>
-            <th class="campos-formula14-h"></th>
-            <th class="campos-formula14-h"></th>
-            <th class="campos-formula14-h"></th>
-            <th class="campos-formula14-h"></th>
-        </tr>
-    </table>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="Identificacion">Identificación:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="Identificacion" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="Periodo">Periodo:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="Periodo" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="Ano">Año:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="Ano">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="Tardias">Tardias:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="Tardias" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="Motivadas">Motivadas:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="Motivadas" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="Inmotivadas">Inmotivadas:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="Inmotivadas" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="text-center">
+                <button type="button" class="btn btn-primary" onclick="enviarDatos()">Enviar</button>
+            </div>
+        </div>
+    </form>
 </div>
 </body>
 </html>

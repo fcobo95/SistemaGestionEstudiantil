@@ -106,6 +106,11 @@ def asigneNotas():
     return render_template('AsignacionNotas.html')
 
 
+@app.route('/Asistencia')
+def muestreAsistencia():
+    return render_template('Asistencia.html')
+
+
 # TODO: MÉTODO PARA ERRORES
 @app.route('/nuevoRegistro', methods=['POST'])
 def agregueRegistro():
@@ -172,6 +177,13 @@ def agregueRegistro():
         elTexto = "Error: Imposible almacenar los datos"
         laRespuesta = json.dumps(elTexto)
         return Response(laRespuesta, 200, mimetype="application/json")
+
+
+# TODO: HACER LOGICA PARA ALMACENAR DATOS EN LA BASE DE DATOS.
+# TODO: FALTA CAMBIAR ALGUNAS COSAS EN EL HTML.
+@app.route('/ingresoAsistencia')
+def ingreseLaAsistencia():
+    return None
 
 
 @app.route('/nuevoProfesor', methods=['POST'])
