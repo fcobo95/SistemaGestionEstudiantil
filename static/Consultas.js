@@ -1,65 +1,64 @@
-function modificarNivel(){
+function modificarNivel() {
 
-    $(".alert").hide()
+    $(".alert").hide();
 
     var elMenuDeCiclos = document.getElementById("ciclo");
     var elCiclo = elMenuDeCiclos.options[elMenuDeCiclos.selectedIndex].text;
 
-    var elMenuDeNiveles= document.getElementById("nivel");
+    var elMenuDeNiveles = document.getElementById("nivel");
     $('#nivel').empty();
     var elementoVacio = document.createElement("option");
     elementoVacio.text = "";
     elMenuDeNiveles.add(elementoVacio);
 
-    switch (elCiclo)
-    {
+    switch (elCiclo) {
         case 'Primer':
-        for(elNivel = 1; elNivel < 4; elNivel++){
-            var nuevoElemento = document.createElement("option");
-            nuevoElemento.text = elNivel.toString();
-            elMenuDeNiveles.add(nuevoElemento);
-        }
-        break;
+            for (elNivel = 1; elNivel < 4; elNivel++) {
+                var nuevoElemento = document.createElement("option");
+                nuevoElemento.text = elNivel.toString();
+                elMenuDeNiveles.add(nuevoElemento);
+            }
+            break;
 
         case 'Segundo':
-        for(elNivel = 4; elNivel < 7; elNivel++){
-            var nuevoElemento = document.createElement("option");
-            nuevoElemento.text = elNivel.toString();
-            elMenuDeNiveles.add(nuevoElemento);
-        }
-        break;
+            for (elNivel = 4; elNivel < 7; elNivel++) {
+                var nuevoElemento = document.createElement("option");
+                nuevoElemento.text = elNivel.toString();
+                elMenuDeNiveles.add(nuevoElemento);
+            }
+            break;
 
         case 'Tercer':
-        for(elNivel = 7; elNivel < 10; elNivel++){
-            var nuevoElemento = document.createElement("option");
-            nuevoElemento.text = elNivel.toString();
-            elMenuDeNiveles.add(nuevoElemento);
-        }
-        break;
+            for (elNivel = 7; elNivel < 10; elNivel++) {
+                var nuevoElemento = document.createElement("option");
+                nuevoElemento.text = elNivel.toString();
+                elMenuDeNiveles.add(nuevoElemento);
+            }
+            break;
 
         case 'Cuarto':
-        for(elNivel = 10; elNivel < 12; elNivel++){
-            var nuevoElemento = document.createElement("option");
-            nuevoElemento.text = elNivel.toString();
-            elMenuDeNiveles.add(nuevoElemento);
-        }
-        break;
+            for (elNivel = 10; elNivel < 12; elNivel++) {
+                var nuevoElemento = document.createElement("option");
+                nuevoElemento.text = elNivel.toString();
+                elMenuDeNiveles.add(nuevoElemento);
+            }
+            break;
 
         default:
             $("#errorCiclo").show()
     }
 }
 
-function modificarSeccion(){
+function modificarSeccion() {
 
-    $(".alert").hide()
+    $(".alert").hide();
 
     var elMenuDeNiveles = document.getElementById("nivel");
     var elNivel = elMenuDeNiveles.options[elMenuDeNiveles.selectedIndex].text;
-    var elMenuDeSecciones= document.getElementById("seccion");
+    var elMenuDeSecciones = document.getElementById("seccion");
 
-    if (elNivel == ""){
-        $("#errorNivel").show()
+    if (elNivel == "") {
+        $("#errorNivel").show();
         $('#seccion').empty();
         var elementoVacio = document.createElement("option");
         elementoVacio.text = "";
@@ -81,12 +80,12 @@ function modificarSeccion(){
             },
             "processData": false,
             "data": JSON.stringify({"nivel": elNivel})
-    }
+        };
         $.ajax(settings).done(function (response) {
             lasSecciones = response['secciones'];
             laCantidadDeSecciones = lasSecciones.length;
-            elContador = 0
-            while (elContador < laCantidadDeSecciones){
+            elContador = 0;
+            while (elContador < laCantidadDeSecciones) {
                 var nuevoElemento = document.createElement("option");
                 nuevoElemento.text = lasSecciones[elContador];
                 elMenuDeSecciones.add(nuevoElemento);
@@ -96,16 +95,16 @@ function modificarSeccion(){
     }
 }
 
-function modificarEstudiante(){
+function modificarEstudiante() {
 
-    $(".alert").hide()
+    $(".alert").hide();
 
     var elMenuDeSecciones = document.getElementById("seccion");
     var laSeccion = elMenuDeSecciones.options[elMenuDeSecciones.selectedIndex].text;
-    var elMenuDeEstudiantes= document.getElementById("estudiante");
+    var elMenuDeEstudiantes = document.getElementById("estudiante");
 
-    if (laSeccion == ""){
-        $("#errorSeccion").show()
+    if (laSeccion == "") {
+        $("#errorSeccion").show();
         $('#estudiante').empty();
         var elementoVacio = document.createElement("option");
         elementoVacio.text = "";
@@ -122,13 +121,13 @@ function modificarEstudiante(){
             "url": "http://127.0.0.1:5000/obtengaEstudiantes",
             "method": "POST",
             "headers": {
-            "content-type": "application/json",
-            "cache-control": "no-cache",
-            "postman-token": "c74b583f-d742-4792-0dc8-29732420b2bf"
-        },
-        "processData": false,
-        "data": JSON.stringify({"seccion":laSeccion})
-        }
+                "content-type": "application/json",
+                "cache-control": "no-cache",
+                "postman-token": "c74b583f-d742-4792-0dc8-29732420b2bf"
+            },
+            "processData": false,
+            "data": JSON.stringify({"seccion": laSeccion})
+        };
 
         $.ajax(settings).done(function (response) {
 
@@ -141,7 +140,7 @@ function modificarEstudiante(){
                 elNombre = response[elContador.toString()]["nombre"];
                 elApellido1 = response[elContador.toString()]["apellido1"];
                 elApellido2 = response[elContador.toString()]["apellido2"];
-                elNombreCompleto = elNombre + " " + elApellido1 + " " + elApellido2
+                elNombreCompleto = elNombre + " " + elApellido1 + " " + elApellido2;
 
                 var nuevoElemento = document.createElement("option");
                 nuevoElemento.text = elNombreCompleto;
@@ -149,7 +148,7 @@ function modificarEstudiante(){
 
                 sessionStorage.setItem(elContador, laIdentificacion);
 
-                elContador+=1
+                elContador += 1
             }
         });
     }
@@ -157,30 +156,30 @@ function modificarEstudiante(){
 
 function modificarAnos() {
 
-    $(".alert").hide()
+    $(".alert").hide();
 
     var elMenuDeEstudiantes = document.getElementById("estudiante");
     var elEstudiante = elMenuDeEstudiantes.options[elMenuDeEstudiantes.selectedIndex].text;
-    var elMenuDeAnos= document.getElementById("ano");
+    var elMenuDeAnos = document.getElementById("ano");
     elAnoActual = new Date().getFullYear();
 
-    if (elEstudiante == ""){
-        $("#errorEstudiante").show()
+    if (elEstudiante == "") {
+        $("#errorEstudiante").show();
         $('#ano').empty();
         var elementoVacio = document.createElement("option");
         elementoVacio.text = "";
         elMenuDeAnos.add(elementoVacio);
     } else {
-        for (elContador = 0; elContador < 11; elContador++){
+        for (elContador = 0; elContador < 11; elContador++) {
             var nuevoElemento = document.createElement("option");
             nuevoElemento.text = elAnoActual.toString();
             elMenuDeAnos.add(nuevoElemento);
-            elAnoActual-=1
+            elAnoActual -= 1
         }
     }
 }
 
-function cargarInformeHogar(){
+function cargarInformeHogar() {
     traerDatos();
     $("#informe").load("informeHogar");
     $("#botonImprimir").show();
@@ -193,14 +192,14 @@ function cargarFormula14() {
 }
 
 function imprimirInforme() {
-     var printContents = document.getElementById("informe").innerHTML;
-     var newWindow = window.open();
-     newWindow.document.write(printContents);
-     newWindow.print();
-     newWindow.close();
+    var printContents = document.getElementById("informe").innerHTML;
+    var newWindow = window.open();
+    newWindow.document.write(printContents);
+    newWindow.print();
+    newWindow.close();
 }
 
-function traerDatos(){
+function traerDatos() {
     var elIndiceDelEstudiante = document.getElementById("estudiante").selectedIndex;
     var laIdentificacion = sessionStorage.getItem(elIndiceDelEstudiante);
     var elAno = document.getElementById("ano").value;
@@ -208,17 +207,17 @@ function traerDatos(){
     console.log(elAno);
 
     var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://127.0.0.1:5000/datosInformeHogar",
-    "method": "POST",
-    "headers": {
-        "content-type": "application/json",
-        "cache-control": "no-cache",
-    },
-    "processData": false,
-    "data": JSON.stringify({"identificacion": laIdentificacion, "ano": elAno})
-    }
+        "async": true,
+        "crossDomain": true,
+        "url": "http://127.0.0.1:5000/datosInformeHogar",
+        "method": "POST",
+        "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-cache"
+        },
+        "processData": false,
+        "data": JSON.stringify({"identificacion": laIdentificacion, "ano": elAno})
+    };
 
     $.ajax(settings).done(function (response) {
         console.log(response);
