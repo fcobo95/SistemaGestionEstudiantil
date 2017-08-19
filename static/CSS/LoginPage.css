@@ -87,12 +87,26 @@
   color: #EF3B3A;
 }
 body {
-  background: #445caf; /* fallback for old browsers */
+    background-image: url("../resources/fundacionpiedad.png");
+    background-size: 600px 600px;
+    background-repeat: no-repeat;
+    font-family: "Roboto", sans-serif;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+/*  background: #445caf; /* fallback for old browsers
   background: -webkit-linear-gradient(right, #445caf, #9f43c2);
   background: -moz-linear-gradient(right, #445caf, #9f43c2);
   background: -o-linear-gradient(right, #445caf, #9f43c2);
-  background: linear-gradient(to left, #445caf, #9f43c2);
-  font-family: "Roboto", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(to left, #445caf, #9f43c2); */
 }
+#footer {
+    padding:10px 0;
+    width:100%;
+}
+h2{
+  padding-right: 85px;
+  font-family: cursive;
+  font-style: Italic;
+  color:#0B0B61;
+}
+
