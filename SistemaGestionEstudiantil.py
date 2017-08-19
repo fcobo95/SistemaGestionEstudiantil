@@ -74,6 +74,9 @@ def redirecciona():
 def login():
     return render_template('Login.html')
 
+@app.route('/MenuOpciones')
+def menu():
+    return render_template('MenuOpciones.html')
 
 @app.route('/formularioIngreso')
 def muestreFormulario():
