@@ -89,7 +89,7 @@ def muestreFormularioProfesor():
 
 
 @app.route('/Consultas')
-@auth.login_required
+#@auth.login_required
 def consulte():
     return render_template('Consultas.html')
 

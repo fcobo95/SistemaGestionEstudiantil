@@ -28,7 +28,7 @@ function login_function() {
                 console.log(response);
                 alert("Welcome, " + username + "!");
                 document.cookie = "authorization=Basic " + response['Token'];
-                window.location.href = "/Consultas.html";
+                window.location.href = "/MenuOpciones";
             },
             error: function (response) {
                 console.log(response);
