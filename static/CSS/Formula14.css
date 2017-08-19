@@ -28,6 +28,27 @@
     font-size: xx-small;
 }
 
+table {
+    width: 30px;
+}
+
+td {
+    height: 100%;
+    width: 100%;
+}
+
+.campos-formula14-hi {
+    font-weight: bolder;
+    width: 50px;
+    height: 20px;
+    column-width: 10px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    text-align: center;
+    font-size: xx-small;
+}
+
 .campos-formula14 {
     font-weight: bold;
     border-width: 2px;
