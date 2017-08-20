@@ -1,4 +1,4 @@
-function agregarNuevoIngreso() {
+function agregueAsistencia() {
 
     var Identificacion = $("#identificacion").val();
     var Periodo = $("#Periodo").val();
