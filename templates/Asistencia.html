@@ -7,42 +7,67 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../static/CSS/Asistencia.css">
-    <script src="../static/Asistencia.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='Consultas.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='Asistencia.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
 <div class="container">
-    <h3>Datos del estudiante</h3>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="text-center">
+                <h1>Asignación de ausencias y tardías</h1>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
     <form class="form-horizontal">
-
         <div class="form-group">
-            <label class="control-label col-sm-4" for="Identificacion">Identificación:</label>
+            <label class="control-label col-sm-4" for="ciclo">Ciclo:</label>
             <div class="col-sm-4">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="identificacion">ID
-                    <span class="caret"></span></button>
+                <select class="form-control" id="ciclo" onchange="modificarNivel()">
+                    <option></option>
+                    <option>Primer</option>
+                    <option>Segundo</option>
+                    <option>Tercer</option>
+                    <option>Cuarto</option>
+                </select>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-4" for="Periodo">Periodo:</label>
+            <label class="control-label col-sm-4" for="nivel">Nivel:</label>
             <div class="col-sm-4">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="Periodo" required>Periodo<span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                </ul>
+                <select class="form-control" id="nivel" onchange="modificarSeccion()">
+                    <option></option>
+                </select>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-4" for="Ano">Año:</label>
+            <label class="control-label col-sm-4" for="seccion">Sección:</label>
             <div class="col-sm-4">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="Ano" required>Año<span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">2017</a></li>
-                </ul>
+                <select class="form-control" id="seccion" onchange="modificarEstudiante()">
+                    <option></option>
+                </select>
             </div>
         </div>
         <div class="form-group">
+            <label class="control-label col-sm-4" for="estudiante">Estudiante:</label>
+            <div class="col-sm-4">
+                <select class="form-control" id="estudiante" onchange="modificarAnos()">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="ano">Año:</label>
+            <div class="col-sm-4">
+                <select class="form-control" id="ano">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+                <div class="form-group">
             <label class="control-label col-sm-4" for="Tardias">Tardias:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" id="Tardias" required>
@@ -62,10 +87,11 @@
         </div>
         <div class="form-group">
             <div class="text-center">
-                <button type="button" class="btn btn-primary" onclick="enviarDatos()">Enviar</button>
+                <button id="btnEnvio" type="button" class="btn btn-default" onclick="agregueAsistencia()">Enviar</button>
             </div>
         </div>
     </form>
 </div>
-</body>
-</html>
+
+
+
