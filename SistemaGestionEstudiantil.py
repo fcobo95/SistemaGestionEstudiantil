@@ -369,7 +369,7 @@ def obtengaMaterias():
 def obtenerDatosInformeHogar():
     laIdentificacion = request.json['identificacion']
     elAno = request.json['ano']
-    losDatos = {}
+    losDatos = {"datos":{}, "notas":{}}
 
     try:
         laPrimeraConsulta = "SELECT NOMBRE, APELLIDO1, APELLIDO2, CICLO, NIVEL, SECCION FROM ESTUDIANTE WHERE IDENTIFICACION='" + laIdentificacion + "'"
@@ -387,19 +387,19 @@ def obtenerDatosInformeHogar():
         losDatos["datos"] = {"nombre": elNombre, "apellido1": elApellido1, "apellido2": elApellido2,
                              "ciclo": elCiclo, "nivel": elNivelComoTexto, "seccion": laSeccion}
 
-        laSegundaConsulta = "SELECT PERIODO1, PERIODO2, PERIODO3, RESULTADO_FINAL, CONDICION FROM CALIFICACION " \
+        laSegundaConsulta = "SELECT MATERIA, PERIODO1, PERIODO2, PERIODO3, RESULTADO_FINAL, CONDICION FROM CALIFICACION " \
                             "WHERE ESTUDIANTE='" + laIdentificacion + "' AND ANO=" + elAno
 
         elCursor.execute(laSegundaConsulta)
-        lasNotas = elCursor.fetchone()
-        print(lasNotas)
-        elPeriodo1 = lasNotas[0]
-        elPeriodo2 = lasNotas[1]
-        elPeriodo3 = lasNotas[2]
-        elResultadoFinal = lasNotas[3]
-        laCondicion = lasNotas[4]
-
-        losDatos["notas"] = {"periodo1": elPeriodo1, "periodo2": elPeriodo2, "periodo3": elPeriodo3,
+        for cadaResultado in elCursor:
+            print(cadaResultado)
+            laMateria = cadaResultado[0]
+            elPeriodo1 = cadaResultado[1]
+            elPeriodo2 = cadaResultado[2]
+            elPeriodo3 = cadaResultado[3]
+            elResultadoFinal = cadaResultado[4]
+            laCondicion = cadaResultado[5]
+            losDatos["notas"][laMateria] = {"periodo1": elPeriodo1, "periodo2": elPeriodo2, "periodo3": elPeriodo3,
                              "final": elResultadoFinal, "condicion": laCondicion}
 
         laRespuesta = json.dumps(losDatos)
