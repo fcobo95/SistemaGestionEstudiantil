@@ -1,5 +1,6 @@
 
 var laCantidadDeMaterias = 0;
+var laCantidadDeInputs = 0;
 var table = document.createElement('table'), tr, td, th, fila, columna;
 
 function muestreMaterias(){
@@ -82,13 +83,15 @@ function muestreEstudiantes(){
             for (fila = laCantidadDeEstudiantes; fila >= laCantidadDeEstudiantes; fila--) {
                 tr = document.createElement('tr');
                 tr.innerHTML = elNombreCompleto;
-                for (columna = 1; columna < laCantidadDeMaterias; columna++) {
+                for (columna = 0; columna < laCantidadDeMaterias; columna++) {
                     td = document.createElement('td');
                     tr.appendChild(td);
                     td.innerHTML = "";
 
                     input = document.createElement('INPUT');
+                    input.setAttribute("id", "input"+laCantidadDeInputs);
                     td.appendChild(input);
+                    laCantidadDeInputs++;
                 }
                 table.appendChild(tr);
             }
