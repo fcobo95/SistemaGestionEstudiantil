@@ -111,5 +111,210 @@ jQuery.each(lasNotas, function(laLlave, elValor) {
             document.getElementById("conv2Esp_cond").innerHTML = elValor["condicion2"];
         }
         break;
+    case "MAT":
+        if (elValor["periodo1"] != null) {
+            document.getElementById("p1Mat").innerHTML = elValor["periodo1"];
+        }
+        if (elValor["periodo2"] != null) {
+            document.getElementById("p2Mat").innerHTML = elValor["periodo2"];
+        }
+        if (elValor["periodo3"] != null) {
+            document.getElementById("p3Mat").innerHTML = elValor["periodo3"];
+        }
+        if (elValor["final"] != null) {
+            document.getElementById("finalMat").innerHTML = elValor["final"];
+        }
+        if (elValor["condicion"] != null) {
+            document.getElementById("condMat").innerHTML = elValor["condicion"];
+        }
+        if (elValor["convocatoria1"] != null) {
+            document.getElementById("conv1Mat").innerHTML = elValor["convocatoria1"];
+        }
+        if (elValor["condicion1"] != null) {
+            document.getElementById("conv1Mat_cond").innerHTML = elValor["condicion1"];
+        }
+        if (elValor["convocatoria2"] != null) {
+            document.getElementById("conv2Mat").innerHTML = elValor["convocatoria2"];
+        }
+        if (elValor["condicion2"] != null) {
+            document.getElementById("conv2Mat_cond").innerHTML = elValor["condicion2"];
+        }
+        break;
+
+    case "ING":
+        if (elValor["periodo1"] != null) {
+            document.getElementById("p1Ing").innerHTML = elValor["periodo1"];
+        }
+        if (elValor["periodo2"] != null) {
+            document.getElementById("p2Ing").innerHTML = elValor["periodo2"];
+        }
+        if (elValor["periodo3"] != null) {
+            document.getElementById("p3Ing").innerHTML = elValor["periodo3"];
+        }
+        if (elValor["final"] != null) {
+            document.getElementById("finalIng").innerHTML = elValor["final"];
+        }
+        if (elValor["condicion"] != null) {
+            document.getElementById("condIng").innerHTML = elValor["condicion"];
+        }
+        if (elValor["convocatoria1"] != null) {
+            document.getElementById("conv1Ing").innerHTML = elValor["convocatoria1"];
+        }
+        if (elValor["condicion1"] != null) {
+            document.getElementById("conv1Ing_cond").innerHTML = elValor["condicion1"];
+        }
+        if (elValor["convocatoria2"] != null) {
+            document.getElementById("conv2Ing").innerHTML = elValor["convocatoria2"];
+        }
+        if (elValor["condicion2"] != null) {
+            document.getElementById("conv2Ing_cond").innerHTML = elValor["condicion2"];
+        }
+        break;
+
+    case "EFI":
+        if (elValor["periodo1"] != null) {
+            document.getElementById("p1Efi").innerHTML = elValor["periodo1"];
+        }
+        if (elValor["periodo2"] != null) {
+            document.getElementById("p2Efi").innerHTML = elValor["periodo2"];
+        }
+        if (elValor["periodo3"] != null) {
+            document.getElementById("p3Efi").innerHTML = elValor["periodo3"];
+        }
+        if (elValor["final"] != null) {
+            document.getElementById("finalEfi").innerHTML = elValor["final"];
+        }
+        if (elValor["condicion"] != null) {
+            document.getElementById("condEfi").innerHTML = elValor["condicion"];
+        }
+        if (elValor["convocatoria1"] != null) {
+            document.getElementById("conv1Efi").innerHTML = elValor["convocatoria1"];
+        }
+        if (elValor["condicion1"] != null) {
+            document.getElementById("conv1Efi_cond").innerHTML = elValor["condicion1"];
+        }
+        if (elValor["convocatoria2"] != null) {
+            document.getElementById("conv2Efi").innerHTML = elValor["convocatoria2"];
+        }
+        if (elValor["condicion2"] != null) {
+            document.getElementById("conv2Efi_cond").innerHTML = elValor["condicion2"];
+        }
+        break;
+    case "MUS":
+        if (elValor["periodo1"] != null) {
+            document.getElementById("p1Mus").innerHTML = elValor["periodo1"];
+        }
+        if (elValor["periodo2"] != null) {
+            document.getElementById("p2Mus").innerHTML = elValor["periodo2"];
+        }
+        if (elValor["periodo3"] != null) {
+            document.getElementById("p3Mus").innerHTML = elValor["periodo3"];
+        }
+        if (elValor["final"] != null) {
+            document.getElementById("finalMus").innerHTML = elValor["final"];
+        }
+        if (elValor["condicion"] != null) {
+            document.getElementById("condMus").innerHTML = elValor["condicion"];
+        }
+        if (elValor["convocatoria1"] != null) {
+            document.getElementById("conv1Mus").innerHTML = elValor["convocatoria1"];
+        }
+        if (elValor["condicion1"] != null) {
+            document.getElementById("conv1Mus_cond").innerHTML = elValor["condicion1"];
+        }
+        if (elValor["convocatoria2"] != null) {
+            document.getElementById("conv2Mus").innerHTML = elValor["convocatoria2"];
+        }
+        if (elValor["condicion2"] != null) {
+            document.getElementById("conv2Mus_cond").innerHTML = elValor["condicion2"];
+        }
+        break;
+    case "REL":
+        if (elValor["periodo1"] != null) {
+            document.getElementById("p1Rel").innerHTML = elValor["periodo1"];
+        }
+        if (elValor["periodo2"] != null) {
+            document.getElementById("p2Rel").innerHTML = elValor["periodo2"];
+        }
+        if (elValor["periodo3"] != null) {
+            document.getElementById("p3Rel").innerHTML = elValor["periodo3"];
+        }
+        if (elValor["final"] != null) {
+            document.getElementById("finalRel").innerHTML = elValor["final"];
+        }
+        if (elValor["condicion"] != null) {
+            document.getElementById("condRel").innerHTML = elValor["condicion"];
+        }
+        if (elValor["convocatoria1"] != null) {
+            document.getElementById("conv1Rel").innerHTML = elValor["convocatoria1"];
+        }
+        if (elValor["condicion1"] != null) {
+            document.getElementById("conv1Rel_cond").innerHTML = elValor["condicion1"];
+        }
+        if (elValor["convocatoria2"] != null) {
+            document.getElementById("conv2Rel").innerHTML = elValor["convocatoria2"];
+        }
+        if (elValor["condicion2"] != null) {
+            document.getElementById("conv2Rel_cond").innerHTML = elValor["condicion2"];
+        }
+        break;
+    case "INF":
+        if (elValor["periodo1"] != null) {
+            document.getElementById("p1Inf").innerHTML = elValor["periodo1"];
+        }
+        if (elValor["periodo2"] != null) {
+            document.getElementById("p2Inf").innerHTML = elValor["periodo2"];
+        }
+        if (elValor["periodo3"] != null) {
+            document.getElementById("p3Inf").innerHTML = elValor["periodo3"];
+        }
+        if (elValor["final"] != null) {
+            document.getElementById("finalInf").innerHTML = elValor["final"];
+        }
+        if (elValor["condicion"] != null) {
+            document.getElementById("condInf").innerHTML = elValor["condicion"];
+        }
+        if (elValor["convocatoria1"] != null) {
+            document.getElementById("conv1Inf").innerHTML = elValor["convocatoria1"];
+        }
+        if (elValor["condicion1"] != null) {
+            document.getElementById("conv1Inf_cond").innerHTML = elValor["condicion1"];
+        }
+        if (elValor["convocatoria2"] != null) {
+            document.getElementById("conv2Inf").innerHTML = elValor["convocatoria2"];
+        }
+        if (elValor["condicion2"] != null) {
+            document.getElementById("conv2Inf_cond").innerHTML = elValor["condicion2"];
+        }
+        break;
+    case "CON":
+        if (elValor["periodo1"] != null) {
+            document.getElementById("p1Con").innerHTML = elValor["periodo1"];
+        }
+        if (elValor["periodo2"] != null) {
+            document.getElementById("p2Con").innerHTML = elValor["periodo2"];
+        }
+        if (elValor["periodo3"] != null) {
+            document.getElementById("p3Con").innerHTML = elValor["periodo3"];
+        }
+        if (elValor["final"] != null) {
+            document.getElementById("finalCon").innerHTML = elValor["final"];
+        }
+        if (elValor["condicion"] != null) {
+            document.getElementById("condCon").innerHTML = elValor["condicion"];
+        }
+        if (elValor["convocatoria1"] != null) {
+            document.getElementById("conv1Con").innerHTML = elValor["convocatoria1"];
+        }
+        if (elValor["condicion1"] != null) {
+            document.getElementById("conv1Con_cond").innerHTML = elValor["condicion1"];
+        }
+        if (elValor["convocatoria2"] != null) {
+            document.getElementById("conv2Con").innerHTML = elValor["convocatoria2"];
+        }
+        if (elValor["condicion2"] != null) {
+            document.getElementById("conv2Con_cond").innerHTML = elValor["condicion2"];
+        }
+        break;
 }
 });
