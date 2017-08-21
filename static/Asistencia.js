@@ -18,7 +18,7 @@ function agregueAsistencia() {
 
     var settings = {
         "async": true,
-        "url": "http://127.0.0.1:5000/ingresoAsistencia",
+        "url": "http://127.0.0.1:5000/asignacionAsistencia",
         "method": "GET",
         "dataType": "json",
         success: function (response) {

@@ -185,13 +185,6 @@ def agregueRegistro():
         return Response(laRespuesta, 200, mimetype="application/json")
 
 
-@app.route('/ingresoAsistencia')
-# @auth.login_required
-def ingreseLaAsistencia():
-    # TODO: HACER LOGICA PARA ALMACENAR DATOS EN LA BASE DE DATOS y DETALLES DE HTML.
-    return None
-
-
 @app.route('/nuevoProfesor', methods=['POST'])
 # @auth.login_required
 def nuevoProfesor():
