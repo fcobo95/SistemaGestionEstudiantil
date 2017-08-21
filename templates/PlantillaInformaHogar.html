@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>InformeHogar</title>
     <link rel="stylesheet" type="text/css" href="../static/CSS/InformaHogar.css"/>
+	<script type="text/javascript" src="{{ url_for('static', filename='PlantillaInformaHogar.js') }}"></script>
 	<img src="../static/resources/mep.png">
 </head>
 
@@ -17,16 +18,16 @@
 	 <h4>Curso Lectivo 2017</h4>
 </div>
 &nbsp;
-<div class="cuerpo">
+<div class="cuerpo" onload="cargaDatos()">
 	<div class="datos1">
 		<table>
 		  <tr>
 			<th WIDTH="45"></th>
 			<th WIDTH="45">Ciclo:</th>
-			<th WIDTH="100"><u>&emsp;&emsp;</u><u id="ciclo">Segundo</u><u>&emsp;&emsp;</u></th>
+			<th WIDTH="100"><u>&emsp;&emsp;</u><u id="cicloInforme">Segundo</u><u>&emsp;&emsp;</u></th>
 			<th WIDTH="10"></th>
 			<th WIDTH="45">Nivel:</th>
-			<th WIDTH="80"><u>&emsp;&emsp;&emsp;&emsp;</u><u id="nivel">5</u><u>&emsp;&emsp;&emsp;&emsp;</u></th>	
+			<th WIDTH="80"><u>&emsp;&emsp;&emsp;&emsp;</u><u id="nivelInforme">5</u><u>&emsp;&emsp;&emsp;&emsp;</u></th>
 		  </tr>
 		</table> 
 		
@@ -44,7 +45,7 @@
 		  </tr>
 		  <tr>
 			<th colspan="3">Estudiante:</th>
-			<th><u>&emsp;</u><u id="estudiante">Nombre del estudiante</u><u>&emsp;</u></th>
+			<th><u>&emsp;</u><u id="estudianteInforme">Nombre del estudiante</u><u>&emsp;</u></th>
 		  </tr>
 		</table> 
 	</div>	
@@ -52,7 +53,7 @@
 		<table>
 			<tr>
 				<th>Sección:</th>
-					<th><u>&emsp;</u><u id="seccion">Quinto uno</u><u>&emsp;</u></th>
+					<th><u>&emsp;</u><u id="seccionInforme">Quinto uno</u><u>&emsp;</u></th>
 			</tr>
 			<tr>
 				<th></th>
@@ -65,7 +66,7 @@
 			</tr>
 			<tr>
 				<th>Identificación:</th>
-					<th><u id="identificacion">&emsp;1-1111-1111&emsp;</u></th>
+					<th><u>&emsp;</u><u id="identificacion">&emsp;1-1111-1111&emsp;</u><u>&emsp;</u></th>
 			</tr>
 		</table>
 	</div>
@@ -118,27 +119,27 @@
 	  </tr>
 	   <tr>
 		<td align="left">Educación Científica</td>
-		<td id="p1"></td>
-		<td id="p2"></td>
-		<td id="p3"></td>
-		<td id="final"></td>
-		<td id="cond"></td>
-		<td id="conv1"></td>
-		<td id="conv1_cond"></td>
-		<td id="conv2"></th>
-		<td id="conv2_cond"></td>
+		<td id="p1Eci"></td>
+		<td id="p2Eci"></td>
+		<td id="p3Eci"></td>
+		<td id="finalEci"></td>
+		<td id="condEci"></td>
+		<td id="conv1Eci"></td>
+		<td id="conv1Eci_cond"></td>
+		<td id="conv2Eci"></th>
+		<td id="conv2Eci_cond"></td>
 	  </tr>
 	  <tr>
 		<td align="left">Español</td>
-		<td id="p1"></td>
-		<td id="p2"></td>
-		<td id="p3"></td>
-		<td id="final"></td>
-		<td id="cond"></td>
-		<td id="conv1"></td>
-		<td id="conv1_cond"></td>
-		<td id="conv2"></th>
-		<td id="conv2_cond"></td>
+		<td id="p1Esp"></td>
+		<td id="p2Esp"></td>
+		<td id="p3Esp"></td>
+		<td id="finalEsp"></td>
+		<td id="condEsp"></td>
+		<td id="conv1Esp"></td>
+		<td id="conv1Esp_cond"></td>
+		<td id="conv2Esp"></th>
+		<td id="conv2Esp_cond"></td>
 	  </tr>
 	  <tr>
 		<td align="left">Matemática</td>

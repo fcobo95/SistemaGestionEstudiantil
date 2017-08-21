@@ -203,8 +203,6 @@ function traerDatos() {
     var elIndiceDelEstudiante = document.getElementById("estudiante").selectedIndex;
     var laIdentificacion = sessionStorage.getItem(elIndiceDelEstudiante);
     var elAno = document.getElementById("ano").value;
-    console.log(laIdentificacion);
-    console.log(elAno);
 
     var settings = {
         "async": true,
@@ -221,5 +219,6 @@ function traerDatos() {
 
     $.ajax(settings).done(function (response) {
         console.log(response);
+        localStorage.setItem('estudiante', JSON.stringify(response));
     });
 }
