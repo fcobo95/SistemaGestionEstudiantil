@@ -13,15 +13,8 @@ TNS = cx_Oracle.makedsn('localhost', 1521, 'XE')
 laBaseDeDatos = cx_Oracle.connect('TCU', 'oracle', TNS)  # usuario/contraseña
 elCursor = laBaseDeDatos.cursor()
 
-# Si imprime bien los datos del usuario, esto quiere decir que si esta podiendo leer bien los datos.
-laConsulta = 'SELECT * FROM USUARIO'
-elCursor.execute(laConsulta)
 
-for each_item1 in elCursor:
-    print(each_item1)
-
-
-# TODO: FALTA REVISAR.
+# TODO: FALTA LOGIN.
 @auth.verify_password
 def verifiqueLaContrasena(usuario_o_token, password):
     try:
@@ -45,7 +38,6 @@ def verifiqueLaContrasena(usuario_o_token, password):
                     return True
     except Exception as e:
         return formateeElError(e)
-
 
 @app.route('/api/Login')
 @auth.login_required
@@ -71,19 +63,23 @@ def redirecciona():
 
 
 @app.route('/Login')
+#@auth.login_required
 def login():
     return render_template('Login.html')
 
 @app.route('/MenuOpciones')
+#@auth.login_required
 def menu():
     return render_template('MenuOpciones.html')
 
 @app.route('/formularioIngreso')
+#@auth.login_required
 def muestreFormulario():
     return render_template('NuevoIngreso.html')
 
 
 @app.route('/formularioProfesor')
+#@auth.login_required
 def muestreFormularioProfesor():
     return render_template('NuevoProfesor.html')
 
@@ -95,27 +91,30 @@ def consulte():
 
 
 @app.route('/informeHogar')
+#@auth.login_required
 def muestreInformeHogar():
     return render_template('PlantillaInformaHogar.html')
 
 
 @app.route('/formula14')
+#@auth.login_required
 def muestreFormula14():
     return render_template('Formula14.html')
 
 
 @app.route('/Notas')
+#@auth.login_required
 def asigneNotas():
     return render_template('AsignacionNotas.html')
 
 
 @app.route('/Asistencia')
+#@auth.login_required
 def muestreAsistencia():
     return render_template('Asistencia.html')
 
-
-# TODO: MÉTODO PARA ERRORES
 @app.route('/nuevoRegistro', methods=['POST'])
+#@auth.login_required
 def agregueRegistro():
     print(request.json)
     # Se reciben datos del estudiante y del encargado. Se ingresan a la BD primero los del encargado
@@ -182,14 +181,16 @@ def agregueRegistro():
         return Response(laRespuesta, 200, mimetype="application/json")
 
 
-# TODO: HACER LOGICA PARA ALMACENAR DATOS EN LA BASE DE DATOS.
-# TODO: FALTA CAMBIAR ALGUNAS COSAS EN EL HTML.
+
 @app.route('/ingresoAsistencia')
+#@auth.login_required
 def ingreseLaAsistencia():
+    # TODO: HACER LOGICA PARA ALMACENAR DATOS EN LA BASE DE DATOS y DETALLES DE HTML.
     return None
 
 
 @app.route('/nuevoProfesor', methods=['POST'])
+#@auth.login_required
 def nuevoProfesor():
     print(request.json)
     laIdentificacion = request.json['identificacion']
@@ -224,6 +225,7 @@ def nuevoProfesor():
 
 
 @app.route('/profesorMateria', methods=['POST'])
+#@auth.login_required
 def asigneMateriaProfesor():
     # TODO: SOLUCIONAR PROBLEMA EN EL EXECUTE
 
@@ -250,6 +252,7 @@ def asigneMateriaProfesor():
 
 
 @app.route('/calificaciones', methods=['POST'])
+#@auth.login_required
 def asigneCalificaciones():
     elEstudiante = request.json['estudiante']
     laMateria = request.json['materia']
@@ -286,11 +289,13 @@ def asigneCalificaciones():
 
 
 @app.route('/actualizarRegistro', methods=['POST'])
+#@auth.login_required
 def actualiceRegistro():
     return ''
 
 
 @app.route('/obtengaSecciones', methods=['POST'])
+#@auth.login_required
 def obtengaSecciones():
     elNivel = request.json['nivel']
     lasSecciones = []
@@ -312,6 +317,7 @@ def obtengaSecciones():
 
 
 @app.route('/obtengaEstudiantes', methods=['POST'])
+#@auth.login_required
 def obtengaEstudiantes():
     laSeccion = request.json['seccion']
     losEstudiantes = {}
@@ -341,6 +347,7 @@ def obtengaEstudiantes():
 
 
 @app.route('/obtengaMaterias', methods=['POST'])
+#@auth.login_required
 def obtengaMaterias():
     elNivel = request.json['nivel']
     lasMaterias = {}
@@ -366,6 +373,7 @@ def obtengaMaterias():
 
 
 @app.route('/datosInformeHogar', methods=['POST'])
+#@auth.login_required
 def obtenerDatosInformeHogar():
     laIdentificacion = request.json['identificacion']
     elAno = request.json['ano']
