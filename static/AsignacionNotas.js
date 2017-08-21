@@ -1,6 +1,7 @@
 
 var laCantidadDeMaterias = 0;
 var laCantidadDeInputs = 0;
+var laCantEstudiantes = 0;
 var table = document.createElement('table'), tr, td, th, fila, columna;
 
 function muestreMaterias(){
@@ -41,6 +42,10 @@ function muestreMaterias(){
                     tr.appendChild(th);
                     th.innerHTML = lasMateriasSeparadas[columna];
                 }
+                    th = document.createElement('th');
+                    tr.appendChild(th);
+                    th.innerHTML = "CONDICION";
+
                table.appendChild(tr);
             }
             document.getElementById('tabla').appendChild(table);
@@ -88,10 +93,23 @@ function muestreEstudiantes(){
                     tr.appendChild(td);
                     td.innerHTML = "";
 
-                    input = document.createElement('INPUT');
+                    input = document.createElement('input');
                     input.setAttribute("id", "input"+laCantidadDeInputs);
                     td.appendChild(input);
                     laCantidadDeInputs++;
+                }
+                var estado = ["","EN PROCESO","APROBADO","REPROBADO"];
+                td = document.createElement('select');
+                td.setAttribute("id", "select"+laCantEstudiantes);
+                laCantEstudiantes++;
+                tr.appendChild(td);
+
+                var option ="";
+                for (contador = 0; contador < estado.length; contador++) {
+                    option = document.createElement('option');
+                    option.value = estado[contador];
+                    option.text = estado[contador];
+                    td.appendChild(option);
                 }
                 table.appendChild(tr);
             }
@@ -105,4 +123,20 @@ function muestreEstudiantes(){
 function enviarDatos(){
 
 
+      $.ajax({
+      "async": true,
+      "crossDomain": true,
+      "url": "http://127.0.0.1:5000/calificaciones",
+      "method": "POST",
+      "headers": {
+        "content-type": "application/json",
+      },
+      "processData": false,
+      "data": losDatos,
+      success: function (response) {
+            console.log(response);
+            $("#result").addClass("alert alert-info").text(response);
+            $("#result").alert();
+      }
+   });
 }

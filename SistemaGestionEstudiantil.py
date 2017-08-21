@@ -259,14 +259,13 @@ def asigneCalificaciones():
     elPeriodo1 = request.json['elPeriodo1']
     elPeriodo2 = request.json['elPeriodo2']
     elPeriodo3 = request.json['elPeriodo3']
-    elResultadoFinal = request.json['resultadoFinal']
     laCondicion = request.json['condicion']
     elAno = request.json['elAno']
-    # TODO:En cliente, por defecto debe haber cero en los tres períodos y en resultadoFinal, y la condición "En Proceso"
+    # TODO:En cliente, por defecto debe haber cero en los tres períodos, y la condición "En Proceso"
     elPeriodo1ComoNumero = int(elPeriodo1)
     elPeriodo2ComoNumero = int(elPeriodo2)
     elPeriodo3ComoNumero = int(elPeriodo3)
-    elResultadoFinalComoNumero = int(elResultadoFinal)
+    elResultadoFinal = (elPeriodo1ComoNumero + elPeriodo2ComoNumero + elPeriodo3ComoNumero ) / 3
     elAnoComoNumero = int(elAno)
 
     try:
@@ -274,7 +273,7 @@ def asigneCalificaciones():
                      'CONDICION, ANO) VALUES (:1, :2, :3, :4, :5, :6, :7, :8)'
         elCursor.execute(laConsulta,
                          (elEstudiante, laMateria, elPeriodo1ComoNumero, elPeriodo2ComoNumero, elPeriodo3ComoNumero,
-                          elResultadoFinalComoNumero, laCondicion, elAnoComoNumero))
+                          elResultadoFinal, laCondicion, elAnoComoNumero))
         laBaseDeDatos.commit()
 
         elTexto = "Los datos se han ingresado con éxito"
@@ -460,7 +459,6 @@ def verifiqueElToken(token):
     except BadSignature:
         return None
     elUsuario = losDatos['Usuario']
-    print(elUsuario)
     return elUsuario
 
 
