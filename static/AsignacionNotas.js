@@ -2,6 +2,7 @@
 var laCantidadDeMaterias = 0;
 var laCantidadDeInputs = 0;
 var laCantEstudiantes = 0;
+var losIdDeLasMaterias =[];
 var table = document.createElement('table'), tr, td, th, fila, columna;
 
 function muestreMaterias(){
@@ -22,12 +23,12 @@ function muestreMaterias(){
 
         $.ajax(settings).done(function (response) {
         laCantidadDeMaterias = Object.keys(response).length;
-        localStorage.setItem("materias",laCantidadDeMaterias);
 
         elContador = 1;
         lasMaterias =[];
         while (elContador < laCantidadDeMaterias + 1) {
-            laIdentificacion = response[elContador.toString()]["identificacion"];
+            laIdentificacion = response[elContador.toString()]["identificacion"]+",";
+            losIdDeLasMaterias +=[laIdentificacion];
             laMateria = response[elContador.toString()]["nombre"]+",";
             lasMaterias += [laMateria]
             lasMateriasSeparadas = lasMaterias.split(",");
@@ -73,7 +74,6 @@ function muestreEstudiantes(){
 
             sessionStorage.clear();
             laCantidadDeEstudiantes = Object.keys(response).length;
-            localStorage.setItem("estudiantes",laCantidadDeEstudiantes);
 
             elContador = 1;
             while (elContador < laCantidadDeEstudiantes + 1) {
@@ -98,7 +98,7 @@ function muestreEstudiantes(){
                     td.appendChild(input);
                     laCantidadDeInputs++;
                 }
-                var estado = ["","EN PROCESO","APROBADO","REPROBADO"];
+                var estado = ["EN PROCESO","APROBADO","REPROBADO"];
                 td = document.createElement('select');
                 td.setAttribute("id", "select"+laCantEstudiantes);
                 laCantEstudiantes++;
@@ -123,7 +123,59 @@ function muestreEstudiantes(){
 function enviarDatos(){
 
 
-      $.ajax({
+   elContadorDeEstudiantes = 1;
+   var elArregloDeDatos = [];
+   lasMateriasSeparadas = losIdDeLasMaterias.split(",");
+
+   var elPeriodoSeleccionado = $("#periodo").val();
+   var ano = $("#ano").val();
+
+   while (elContadorDeEstudiantes < laCantEstudiantes + 1) {
+       for (cadaMateria = 0; cadaMateria < laCantidadDeMaterias; cadaMateria++) {
+            elArregloDeDatos += "{estudiante:"+sessionStorage.getItem(elContadorDeEstudiantes)+ ", ";
+            if(document.getElementById("input"+cadaMateria).value == ""){
+                elArregloDeDatos += "materia:"+lasMateriasSeparadas[cadaMateria]+", periodo"+elPeriodoSeleccionado  +":0, ";
+            }
+            else{
+            elArregloDeDatos += "materia:"+lasMateriasSeparadas[cadaMateria] +", periodo"+elPeriodoSeleccionado  +":"+ document.getElementById("input"+cadaMateria).value +", ";
+            }
+       var laCondicionSeleccionada= $("#select"+elContadorDeEstudiantes).val(); //CORREGIR
+       elArregloDeDatos += "condicion:" + laCondicionSeleccionada +", "
+       elArregloDeDatos += "ano:" + ano +"}, "
+       }
+       elContadorDeEstudiantes +=1;
+   }
+    console.log(elArregloDeDatos);
+
+  var periodo1;
+  var periodo2;
+  var periodo3;
+
+//PERIODOS SE AGREGAN EN JSON
+  if(elPeriodoSeleccionado == "1")
+  {
+    periodo2 = 0;
+    periodo3 = 0;
+  }
+  else if (elPeriodoSeleccionado == "2")
+  {
+    periodo1 = 0;
+    periodo3 = 0;
+  }
+  else
+  {
+    periodo1 = 0;
+    periodo2 = 0;
+  }
+
+  var losDatos = JSON.stringify
+  ({
+
+  });
+
+ // console.log(losDatos)
+
+  /*    $.ajax({
       "async": true,
       "crossDomain": true,
       "url": "http://127.0.0.1:5000/calificaciones",
@@ -138,5 +190,5 @@ function enviarDatos(){
             $("#result").addClass("alert alert-info").text(response);
             $("#result").alert();
       }
-   });
+   }); */
 }
