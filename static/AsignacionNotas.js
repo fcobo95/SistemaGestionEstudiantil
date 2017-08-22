@@ -1,4 +1,16 @@
-
+//TODO: CSS de tabla puede ser mejorado.
+/*
+    Se realizan filtros por Ciclo, Nivel, Sección. Se obtiene desde el servidor,
+    los nombres de los estudiantes de la sección seleccionada. A través del nivel,
+    se obtienen las materias que esos estudiantes reciben. Con estos datos se crea
+    una tabla desde este JS. Los estudiantes se asignan en la primera columna, y las
+    materias en el resto de columnas. En las celdas entre materias y estudiantes,
+    se crea un input con su respectivo ID para ingresar la calificación. La última
+    columna corresponde a el estado final del estudiante (Aprobado...), en esta se
+    tiene un select con un ID.
+    A través de los ID se recolecta la información ingresada, y se va formando un JSON,
+    este JSON es envíado al servidor, en donde se procesa y se guarda en la BD.
+*/
 var laCantidadDeMaterias = 0;
 var laCantidadDeInputs = 0;
 var laCantEstudiantes = 0;

@@ -1,5 +1,7 @@
 function agregarNuevoIngreso() {
 
+//TODO: Implentar filtros para ciclo, nivel (de Consultas.js)
+
 // Se recolectan los datos del HTML
     var idEstudiante = $("#idEstudiante").val();
     var nombreEstudiante = $("#nombreEstudiante").val();
