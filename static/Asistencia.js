@@ -1,6 +1,6 @@
 function agregueAsistencia() {
 
-    var Identificacion = $("#identificacion").val();
+     var Identificacion = ""; /* $("#identificacion").val(); TODO: se puede obtener de session storage. */
     var Periodo = $("#Periodo").val();
     var Ano = $("#Ano").val();
     var Tardias = $("#Tardias").val();
@@ -15,20 +15,20 @@ function agregueAsistencia() {
         motivadas: Motivadas,
         inmotivadas: Inmotivadas
     });
-
-    var settings = {
-        "async": true,
-        "url": "http://127.0.0.1:5000/asignacionAsistencia",
-        "method": "GET",
-        "dataType": "json",
+    $.ajax({
+      "async": true,
+      "crossDomain": true,
+      "url": "http://127.0.0.1:5000/asignacionAsistencia",
+      "method": "POST",
+      "headers": {
+        "content-type": "application/json",
+      },
+      "processData": false,
+      "data": losDatos,
         success: function (response) {
             console.log(response);
-            alert("Se han guardado los datos ingresados!");
-            window.location.href = "/index";
-        },
-        error: function (response) {
-            console.log(response);
-            alert("Error: " + response['statusText'])
+            $("#result").addClass("alert alert-info").text(response);
+            $("#result").alert();
         }
-    }
+    });
 }
