@@ -1,3 +1,10 @@
+/*
+   Consultas.js es implementado en AsignaciónNotas y Asistencias para filtrar información.
+   Acá se tiene métodos para ir modificando las opciones de cada select en Consultas.html.
+   Estas Consultas son para reportes principalmente, acá se tienen los reportes existentes
+   y se le cargan los datos que son obtenidos desde el servidor.
+*/
+
 function modificarNivel() {
 
     $(".alert").hide();
