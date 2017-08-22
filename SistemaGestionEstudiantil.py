@@ -193,7 +193,7 @@ def agregueRegistro():
 @app.route('/nuevoProfesor', methods=['POST'])
 # @auth.login_required
 def nuevoProfesor():
-    # Se reciben datos de profesores que fueron enviados desde NuevoProfesor.js
+    # Se reciben y se guardan datos de profesores que fueron enviados desde NuevoProfesor.js
     laIdentificacion = request.json['identificacion']
     elNombre = request.json['nombre']
     elPrimerApellido = request.json['primerApellido']
@@ -225,8 +225,9 @@ def nuevoProfesor():
         return Response(laRespuesta, mimetype="application/json")
 
 
-@app.route('/asignacionAsistencia')
+@app.route('/asignacionAsistencia', methods=['POST'])
 def asigneLaAsistencia():
+    # Se reciben y se guardan datos provenientes de Asistencia.js
     laIdentificacion = request.json['identificacion'],
     elPeriodo = request.json['periodo']
     elAno = request.json['ano']

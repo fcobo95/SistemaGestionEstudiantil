@@ -1,4 +1,5 @@
 -- ELIMINAR TABLAS
+--Se da formato a la fecha en la base de datos para evitar conflictos
 ALTER SESSION SET NLS_DATE_FORMAT = 'DD/MM/YYYY';
 
 DROP TABLE USUARIO CASCADE CONSTRAINTS;

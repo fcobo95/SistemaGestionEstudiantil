@@ -15,7 +15,6 @@ function agregarNuevoProfesor() {
         telefono: telefono,
         correo: correo});
 
-    //TODO: REPUESTA CORRECTA (NO SOLO SUCCESS)
 
     $.ajax({
       "async": true,
@@ -32,6 +31,7 @@ function agregarNuevoProfesor() {
             $("#result").addClass("alert alert-info").text(response);
             $("#result").alert();
         }
+   //TODO: REPUESTA CORRECTA, NO SÓLO SUCCESS (AUNQUE LO ANTERIOR FUNCIONA).
 
        /*  success: function (response) {
             console.log(response);
