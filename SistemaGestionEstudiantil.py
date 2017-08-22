@@ -1,9 +1,12 @@
+#SERVIDOR
+#Librerías requeridas
 from flask import Flask, request, json, jsonify, Response, redirect, render_template
 from flask_httpauth import HTTPBasicAuth
 from itsdangerous import (TimedJSONWebSignatureSerializer as Serializer, BadSignature, SignatureExpired)
 import cx_Oracle
 import base64
 
+# TODO: MEJORAR Y COMPLETAR FUNCIONALIDAD RELACIONADA CON LOGIN
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'DJE969395cmccce'
 auth = HTTPBasicAuth()
@@ -14,7 +17,7 @@ laBaseDeDatos = cx_Oracle.connect('TCU', 'oracle', TNS)  # usuario/contraseña
 elCursor = laBaseDeDatos.cursor()
 
 
-# TODO: FALTA LOGIN.
+# PARA LOGIN
 @auth.verify_password
 def verifiqueLaContrasena(usuario_o_token, password):
     try:
@@ -40,6 +43,7 @@ def verifiqueLaContrasena(usuario_o_token, password):
         return formateeElError(e)
 
 
+# PARA LOGIN
 @app.route('/api/Login')
 @auth.login_required
 def obtengaElToken():
@@ -64,7 +68,7 @@ def redirecciona():
 
 
 @app.route('/Login')
-# @auth.login_required
+# @auth.login_required #Indica que para acceder a este método, debe haber iniciado sesión
 def login():
     return render_template('Login.html')
 
@@ -120,11 +124,12 @@ def muestreAsistencia():
 @app.route('/nuevoRegistro', methods=['POST'])
 # @auth.login_required
 def agregueRegistro():
-    print(request.json)
-    # Se reciben datos del estudiante y del encargado. Se ingresan a la BD primero los del encargado
+    # La mayoría de métodos funcionan similar a este.
+    # Se reciben datos del estudiante y del encargado.
+    # Se ingresan a la Base de Datos primero los del encargado
     # TODO: OPCIÓN PARA SELECCIONAR ENCARGADO EXISTENTE A UN NUEVO ALUMNO (CREAR NUEVO ENCARGADO O SELECCIONAR)
 
-    # Datos estudiante
+    # Se reciben datos estudiante y encargado que fueron enviados desde NuevoIngreso.js
     laIdentificacion = request.json['identificacion']
     elNombre = request.json['nombre']
     elPrimerApellido = request.json['primerApellido']
@@ -141,6 +146,8 @@ def agregueRegistro():
     if elSexo == 'Mujer':
         elSexoComoChar = "M"
 
+    # Se da formato a la fecha para que sea aceptado en la base de datos
+    #Nota: Algunos de los datos recibidos debe ser formateados para que ingresen adecuadamente a la base de datos
     laFechaDividida = laFechaNacimiento.split("-")
     elAno = laFechaDividida[0]
     elMes = laFechaDividida[1]
@@ -148,7 +155,7 @@ def agregueRegistro():
     laFechaFormateada = elDia + "/" + elMes + "/" + elAno
 
     # Datos encargado
-    laIdentificacionEncargado = request.json['IDencargado']  # Id del encargado que se asocia a estudiante
+    laIdentificacionEncargado = request.json['IDencargado']  # Id del encargado que se asocia a estudiante (FOREIGN KEY)
     elNombreEncargado = request.json['nombreEncargado']
     elTelefono = request.json['telefono']
     elParentesco = request.json['parentesco']
@@ -156,31 +163,29 @@ def agregueRegistro():
     elCorreo = request.json['correo']
     elTelefonoComoNumero = int(elTelefono)
 
+    #Insert a la base de datos (Sentencia y variables anteriores)
     try:
-
         laConsulta = 'INSERT INTO ENCARGADO(IDENTIFICACION, NOMBRE_COMPLETO, TELEFONO, PARENTESCO, DIRECCION, CORREO) ' \
                      'VALUES (:1,:2, :3, :4, :5, :6)'
         elCursor.execute(laConsulta,
-                         (
-                             laIdentificacionEncargado, elNombreEncargado, elTelefonoComoNumero, elParentesco,
-                             laDireccion, elCorreo))
-        laBaseDeDatos.commit()
+                         (laIdentificacionEncargado, elNombreEncargado, elTelefonoComoNumero, elParentesco,
+                          laDireccion, elCorreo))
+        laBaseDeDatos.commit()  #COMMIT para que los datos se guarden efectivamente
 
         laConsulta = 'INSERT INTO ESTUDIANTE (IDENTIFICACION, NOMBRE, APELLIDO1, APELLIDO2, SEXO, FECHA_NACIMIENTO, ' \
                      'CICLO, NIVEL, SECCION, ENCARGADO) VALUES (:1,:2, :3, :4, :5, :6, :7, :8, :9, :10)'
         elCursor.execute(laConsulta,
                          (laIdentificacion, elNombre, elPrimerApellido, elSegundoApellido, elSexoComoChar,
                           laFechaFormateada, elCiclo.upper(), elNivelComoNumero, laSeccion, laIdentificacionEncargado))
-        # datetime.strptime(laFechaNacimiento, "%d%m%Y")
         laBaseDeDatos.commit()
 
-        elTexto = "Los datos se han ingresado con éxito"
-        laRespuesta = json.dumps(elTexto)  # convertir respuesta a json
+        elTexto = "Los datos se han ingresado con éxito."  #Respuesta que se muestra al cliente
+        laRespuesta = json.dumps(elTexto)  # Se convierte respuesta a JSON
         return Response(laRespuesta, 200, mimetype="application/json")
 
     except Exception as e:
         print(e)
-        elTexto = "Error: Imposible almacenar los datos"
+        elTexto = "Error: Imposible almacenar los datos."
         laRespuesta = json.dumps(elTexto)
         return Response(laRespuesta, 200, mimetype="application/json")
 
@@ -188,7 +193,7 @@ def agregueRegistro():
 @app.route('/nuevoProfesor', methods=['POST'])
 # @auth.login_required
 def nuevoProfesor():
-    print(request.json)
+    # Se reciben datos de profesores que fueron enviados desde NuevoProfesor.js
     laIdentificacion = request.json['identificacion']
     elNombre = request.json['nombre']
     elPrimerApellido = request.json['primerApellido']
@@ -278,6 +283,7 @@ def asigneMateriaProfesor():
 @app.route('/calificaciones', methods=['POST'])
 # @auth.login_required
 def asigneCalificaciones():
+    # Se reciben datos de profesores que fueron enviados desde AsignacionNotas.js
     elEstudiante = request.json['estudiante']
     laMateria = request.json['materia']
     elPeriodo1 = request.json['elPeriodo1']
@@ -289,8 +295,9 @@ def asigneCalificaciones():
     elPeriodo1ComoNumero = int(elPeriodo1)
     elPeriodo2ComoNumero = int(elPeriodo2)
     elPeriodo3ComoNumero = int(elPeriodo3)
-    elResultadoFinal = (elPeriodo1ComoNumero + elPeriodo2ComoNumero + elPeriodo3ComoNumero) / 3
     elAnoComoNumero = int(elAno)
+
+    elResultadoFinal = (elPeriodo1ComoNumero + elPeriodo2ComoNumero + elPeriodo3ComoNumero) / 3
 
     try:
         laConsulta = 'INSERT INTO CALIFICACION(ESTUDIANTE, MATERIA, PERIODO1, PERIODO2, PERIODO3, RESULTADO_FINAL, ' \
@@ -313,13 +320,15 @@ def asigneCalificaciones():
 
 @app.route('/actualizarRegistro', methods=['POST'])
 # @auth.login_required
-def actualiceRegistro():
+def actualiceRegistro():  #Método pensando para realizar actualizaciones, se requieren varias.
     return ''
 
 
 @app.route('/obtengaSecciones', methods=['POST'])
 # @auth.login_required
 def obtengaSecciones():
+    # Se recibe el nivel proveniente de Consultas.js (Seleccionado en Consultas.html)
+    # Se consulta la tabla ESTUDIANTES para mostrar únicamente a las SECCIONES de ese nivel.
     elNivel = request.json['nivel']
     lasSecciones = []
     try:
@@ -342,6 +351,9 @@ def obtengaSecciones():
 @app.route('/obtengaEstudiantes', methods=['POST'])
 # @auth.login_required
 def obtengaEstudiantes():
+    # Se recibe la sección proveniente de Consultas.js (Seleccionado en Consultas.html)
+    # Se consulta la tabla ESTUDIANTES para mostrar únicamente a los estudiantes en dicha sección.
+    # Los datos que se reciben de la BD vienen en un arreglo; son convertidos a JSON para enviarlos al cliente.
     laSeccion = request.json['seccion']
     losEstudiantes = {}
     try:
@@ -372,6 +384,7 @@ def obtengaEstudiantes():
 @app.route('/obtengaMaterias', methods=['POST'])
 # @auth.login_required
 def obtengaMaterias():
+    #Se utiliza la misma lógica del método obtengaEstudiantes()
     elNivel = request.json['nivel']
     lasMaterias = {}
     try:
@@ -398,6 +411,10 @@ def obtengaMaterias():
 @app.route('/datosInformeHogar', methods=['POST'])
 # @auth.login_required
 def obtenerDatosInformeHogar():
+    #Se recibe una identitifación de estudiantes y un año, desde Consultas.js
+    #Se consulta la tabla ESTUDIANTE y se obtienen los datos requeridos para mostrar en el Informe Hogar.
+    #Estos datos recibidos desde la base de datos vienen en un arreglo, por lo tanto,
+    #son convertidos a JSON para ser enviados al cliente.
     laIdentificacion = request.json['identificacion']
     elAno = request.json['ano']
     losDatos = {"datos": {}, "notas": {}}
@@ -406,7 +423,6 @@ def obtenerDatosInformeHogar():
         laPrimeraConsulta = "SELECT NOMBRE, APELLIDO1, APELLIDO2, CICLO, NIVEL, SECCION FROM ESTUDIANTE WHERE IDENTIFICACION='" + laIdentificacion + "'"
         elCursor.execute(laPrimeraConsulta)
         elEstudiante = elCursor.fetchone()
-        print(elEstudiante)
         elNombre = elEstudiante[0]
         elApellido1 = elEstudiante[1]
         elApellido2 = elEstudiante[2]
@@ -423,7 +439,6 @@ def obtenerDatosInformeHogar():
 
         elCursor.execute(laSegundaConsulta)
         for cadaResultado in elCursor:
-            print(cadaResultado)
             laMateria = cadaResultado[0]
             elPeriodo1 = cadaResultado[1]
             elPeriodo2 = cadaResultado[2]
@@ -443,6 +458,7 @@ def obtenerDatosInformeHogar():
         return Response(laRespuesta, 200, mimetype="application/json")
 
 
+# PARA LOGIN
 def definaElUsuario():
     elUsuario = auth.username()
     if elUsuario == "":
@@ -457,6 +473,7 @@ def definaElUsuario():
     return elUsuario
 
 
+# PARA LOGIN
 def formateeElError(e):
     elErrorComoTexto = str(e)
     elEnunciado = "Lo lamento. Ha ocurrido un error " + elErrorComoTexto
@@ -465,6 +482,7 @@ def formateeElError(e):
     return Response(elEnunciadoComoJSON, elErrorHTTP, mimetype="application/json")
 
 
+# PARA LOGIN
 def genereElToken(usuario, contrasena, expiration=1800):
     laSerie = Serializer(app.config['SECRET_KEY'], expires_in=expiration)
     elToken = laSerie.dumps(
@@ -474,6 +492,7 @@ def genereElToken(usuario, contrasena, expiration=1800):
     return elToken
 
 
+# PARA LOGIN
 def verifiqueElToken(token):
     laSerie = Serializer(app.config['SECRET_KEY'])
     try:
@@ -485,6 +504,6 @@ def verifiqueElToken(token):
     elUsuario = losDatos['Usuario']
     return elUsuario
 
-
+#Ejecución local de la aplicación
 if __name__ == '__main__':
     app.run(debug=True, port=5000, host='0.0.0.0')
