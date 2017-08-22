@@ -285,7 +285,7 @@ def asigneCalificaciones():
     elPeriodo3 = request.json['elPeriodo3']
     laCondicion = request.json['condicion']
     elAno = request.json['elAno']
-    # TODO:En cliente, por defecto debe haber cero en los tres períodos, y la condición "En Proceso"
+
     elPeriodo1ComoNumero = int(elPeriodo1)
     elPeriodo2ComoNumero = int(elPeriodo2)
     elPeriodo3ComoNumero = int(elPeriodo3)

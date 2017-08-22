@@ -122,60 +122,53 @@ function muestreEstudiantes(){
 }
 function enviarDatos(){
 
-
+   elContadorTotal = 0;
    elContadorDeEstudiantes = 1;
    var elArregloDeDatos = [];
    lasMateriasSeparadas = losIdDeLasMaterias.split(",");
 
-   var elPeriodoSeleccionado = $("#periodo").val();
-   var ano = $("#ano").val();
+   var elPeriodoSeleccionado = $('#periodo').val();
+   var ano = $('#ano').val();
 
    while (elContadorDeEstudiantes < laCantEstudiantes + 1) {
+        var laCondicionSeleccionada= $('#select'+(elContadorDeEstudiantes-1)).val();
        for (cadaMateria = 0; cadaMateria < laCantidadDeMaterias; cadaMateria++) {
-            elArregloDeDatos += "{estudiante:"+sessionStorage.getItem(elContadorDeEstudiantes)+ ", ";
-            if(document.getElementById("input"+cadaMateria).value == ""){
-                elArregloDeDatos += "materia:"+lasMateriasSeparadas[cadaMateria]+", periodo"+elPeriodoSeleccionado  +":0, ";
+            elArregloDeDatos += '{"estudiante":"'+sessionStorage.getItem(elContadorDeEstudiantes)+ '", ';
+            if(document.getElementById('input'+cadaMateria).value == ""){
+                elArregloDeDatos += '"materia":"'+lasMateriasSeparadas[cadaMateria]+'", "elPeriodo'+elPeriodoSeleccionado  +'":"0", ';
             }
             else{
-            elArregloDeDatos += "materia:"+lasMateriasSeparadas[cadaMateria] +", periodo"+elPeriodoSeleccionado  +":"+ document.getElementById("input"+cadaMateria).value +", ";
+            elArregloDeDatos += '"materia":"'+lasMateriasSeparadas[cadaMateria] +'", "elPeriodo'+elPeriodoSeleccionado  +'":"'+ document.getElementById('input'+cadaMateria).value +'", ';
             }
-       var laCondicionSeleccionada= $("#select"+elContadorDeEstudiantes).val(); //CORREGIR
-       elArregloDeDatos += "condicion:" + laCondicionSeleccionada +", "
-       elArregloDeDatos += "ano:" + ano +"}, "
-       }
-       elContadorDeEstudiantes +=1;
+       elArregloDeDatos += '"condicion":"' + laCondicionSeleccionada +'", '
+       elArregloDeDatos += '"elAno":"' + ano +'", '
+
+       if(elPeriodoSeleccionado == '1')
+      {
+        elArregloDeDatos +='"elPeriodo2":"0", '
+        elArregloDeDatos +='"elPeriodo3":"0"' + '};'
+      }
+      else if (elPeriodoSeleccionado == '2')
+      {
+        elArregloDeDatos +='"elPeriodo1":"0", '
+        elArregloDeDatos +='"elPeriodo3":0"' + '};'
+      }
+      else if (elPeriodoSeleccionado == '3')
+      {
+        elArregloDeDatos +='"elPeriodo1": "0", '
+        elArregloDeDatos +='"elPeriodo2": "0"' + '};'
+      }
+      elContadorTotal+=1;
    }
-    console.log(elArregloDeDatos);
+    elContadorDeEstudiantes +=1;
+}
 
-  var periodo1;
-  var periodo2;
-  var periodo3;
+   for (cadaJSON = 0; cadaJSON < elContadorTotal; cadaJSON++) {
+      losJSONsSeparados = elArregloDeDatos.split(";");
+      losDatos = losJSONsSeparados[cadaJSON]
+      console.log(losDatos);
 
-//PERIODOS SE AGREGAN EN JSON
-  if(elPeriodoSeleccionado == "1")
-  {
-    periodo2 = 0;
-    periodo3 = 0;
-  }
-  else if (elPeriodoSeleccionado == "2")
-  {
-    periodo1 = 0;
-    periodo3 = 0;
-  }
-  else
-  {
-    periodo1 = 0;
-    periodo2 = 0;
-  }
-
-  var losDatos = JSON.stringify
-  ({
-
-  });
-
- // console.log(losDatos)
-
-  /*    $.ajax({
+     $.ajax({
       "async": true,
       "crossDomain": true,
       "url": "http://127.0.0.1:5000/calificaciones",
@@ -190,5 +183,6 @@ function enviarDatos(){
             $("#result").addClass("alert alert-info").text(response);
             $("#result").alert();
       }
-   }); */
+   });
+  }
 }
