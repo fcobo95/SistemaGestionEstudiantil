@@ -1,3 +1,4 @@
+//Se "rellena" PlantillaInformaHogar.html, la misma es cargada en la vista de Consultas.
 var elIndiceDelEstudiante = document.getElementById("estudiante").selectedIndex;
 var laIdentificacion = sessionStorage.getItem(elIndiceDelEstudiante);
 document.getElementById("identificacion").innerHTML = laIdentificacion;

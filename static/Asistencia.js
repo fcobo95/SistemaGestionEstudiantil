@@ -1,12 +1,14 @@
 function agregueAsistencia() {
 
-     var Identificacion = ""; /* $("#identificacion").val(); TODO: se puede obtener de session storage. */
+// Se recolectan los datos del HTML
+    var Identificacion = ""; /* $("#identificacion").val(); TODO: se puede obtener de session storage. */
     var Periodo = $("#Periodo").val();
     var Ano = $("#Ano").val();
     var Tardias = $("#Tardias").val();
     var Motivadas = $("#Motivadas").val();
     var Inmotivadas = $("#Inmotivadas").val();
 
+//Se convierten a JSON
     var losDatos = JSON.stringify({
         identificacion: Identificacion,
         periodo: Periodo,
@@ -15,6 +17,8 @@ function agregueAsistencia() {
         motivadas: Motivadas,
         inmotivadas: Inmotivadas
     });
+
+//Se envía el JSON al servidor a través de AJAX
     $.ajax({
       "async": true,
       "crossDomain": true,

@@ -1,5 +1,6 @@
 function agregarNuevoIngreso() {
 
+// Se recolectan los datos del HTML
     var idEstudiante = $("#idEstudiante").val();
     var nombreEstudiante = $("#nombreEstudiante").val();
     var apellidoEstudiante1 = $("#apellido1").val();
@@ -17,6 +18,7 @@ function agregarNuevoIngreso() {
     var direccion = $("#direccion").val();
     var correo = $("#correo").val();
 
+//Se convierten a JSON
     var losDatos = JSON.stringify({
         identificacion: idEstudiante,
         nombre: nombreEstudiante,
@@ -34,8 +36,7 @@ function agregarNuevoIngreso() {
         direccion: direccion,
         correo: correo});
 
-        //TODO: REPUESTA CORRECTA (NO SOLO SUCCESS)
-
+//Se envía el JSON al servidor a través de AJAX
     $.ajax({
       "async": true,
       "crossDomain": true,
@@ -51,17 +52,5 @@ function agregarNuevoIngreso() {
             $("#result").addClass("alert alert-info").text(response);
             $("#result").alert();
         }
-
-       /*  success: function (response) {
-            console.log(response);
-            $("#result").addClass("alert alert-success").text("Lo datos se han almacenado correctamente.");
-            $("#result").alert();
-        },
-        error: function (response) {
-           console.log(response);
-            $("#result").addClass("alert alert-danger").text("No es posible guardar los datos.");
-            $("#result").alert();
-        }
-        */
     });
 }

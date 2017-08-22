@@ -1,5 +1,6 @@
 function agregarNuevoProfesor() {
 
+// Se recolectan los datos del HTML
     var identificacion = $("#identificacion").val();
     var nombre = $("#nombre").val();
     var primerApellido = $("#primerApellido").val();
@@ -7,6 +8,7 @@ function agregarNuevoProfesor() {
     var telefono = $("#telefono").val();
     var correo = $("#correo").val();
 
+//Se convierten a JSON
      var losDatos = JSON.stringify({
         identificacion: identificacion,
         nombre: nombre,
@@ -15,7 +17,7 @@ function agregarNuevoProfesor() {
         telefono: telefono,
         correo: correo});
 
-
+//Se envía el JSON al servidor a través de AJAX
     $.ajax({
       "async": true,
       "crossDomain": true,
