@@ -166,7 +166,6 @@ function enviarDatos(){
    for (cadaJSON = 0; cadaJSON < elContadorTotal; cadaJSON++) {
       losJSONsSeparados = elArregloDeDatos.split(";");
       losDatos = losJSONsSeparados[cadaJSON]
-      console.log(losDatos);
 
      $.ajax({
       "async": true,
